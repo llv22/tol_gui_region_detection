@@ -2,7 +2,6 @@ import os.path as osp
 import argparse
 
 import mmcv
-from copy import copy
 
 from mmengine.fileio import dump, load
 from mmengine.utils import track_iter_progress
