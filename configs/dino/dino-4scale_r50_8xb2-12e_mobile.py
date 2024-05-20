@@ -59,7 +59,7 @@ model = dict(
         temperature=20),  # 10000 for DeformDETR
     bbox_head=dict(
         type='DINOHead',
-        num_classes=80,
+        num_classes=1,
         sync_cls_avg_factor=True,
         loss_cls=dict(
             type='FocalLoss',
@@ -140,7 +140,14 @@ optim_wrapper = dict(
 )  # custom_keys contains sampling_offsets and reference_points in DeformDETR  # noqa
 
 # learning policy
-max_epochs = 12
+metainfo = {
+    'classes': ('bbox', ),
+    'palette': [
+        (220, 20, 60),
+    ]
+}
+
+max_epochs = 2
 train_cfg = dict(
     type='EpochBasedTrainLoop', max_epochs=max_epochs, val_interval=1)
 

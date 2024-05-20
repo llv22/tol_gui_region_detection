@@ -1,5 +1,6 @@
 # dataset settings
 dataset_type = 'CocoDataset'
+classes = ('bbox')
 data_root = 'configs/dino/'
 
 # Example to use different file client
@@ -44,7 +45,8 @@ train_dataloader = dict(
     sampler=dict(type='DefaultSampler', shuffle=True),
     batch_sampler=dict(type='AspectRatioBatchSampler'),
     dataset=dict(
-        type=dataset_type,
+        type=dataset_type, # explicitly add your class names to the field `metainfo`
+        metainfo=dict(classes=classes),
         data_root=data_root,
         ann_file='data/train/annotation_coco.json',
         data_prefix=dict(img=image_prefix),
@@ -58,7 +60,8 @@ val_dataloader = dict(
     drop_last=False,
     sampler=dict(type='DefaultSampler', shuffle=False),
     dataset=dict(
-        type=dataset_type,
+        type=dataset_type, # explicitly add your class names to the field `metainfo`
+        metainfo=dict(classes=classes),
         data_root=data_root,
         ann_file='data/val/annotation_coco.json',
         data_prefix=dict(img=image_prefix),
