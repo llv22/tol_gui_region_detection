@@ -1,6 +1,7 @@
 _base_ = [
     '../_base_/datasets/mobile_detection.py', '../_base_/default_runtime.py'
 ]
+
 model = dict(
     type='DINO',
     num_queries=900,  # num_matching_queries
@@ -146,6 +147,20 @@ metainfo = {
         (220, 20, 60),
     ]
 }
+
+vis_backends = [
+    dict(type='LocalVisBackend'),
+    dict(type='TensorboardVisBackend'),
+    dict(type='WandbVisBackend',
+         init_kwargs={
+            'project': 'mmdetection',
+            'group': 'nlp-in-477'
+         })
+]
+visualizer = dict(
+    type='DetLocalVisualizer',
+    vis_backends=vis_backends,
+    name='visualizer')
 
 max_epochs = 2
 train_cfg = dict(

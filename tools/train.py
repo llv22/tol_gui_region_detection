@@ -6,6 +6,7 @@ import os.path as osp
 from mmengine.config import Config, DictAction
 from mmengine.registry import RUNNERS
 from mmengine.runner import Runner
+from colorama import Fore, Back, Style
 
 from mmdet.utils import setup_cache_size_limit_of_dynamo
 
@@ -13,6 +14,9 @@ from mmdet.utils import setup_cache_size_limit_of_dynamo
 def parse_args():
     parser = argparse.ArgumentParser(description='Train a detector')
     parser.add_argument('config', help='train config file path')
+    parser.add_argument('--train_batch_size', type=int, default=6, help='train batch size')
+    parser.add_argument('--val_batch_size', type=int, default=6, help='val batch size')
+    parser.add_argument('--lr', type=float, default=0.001, help='learning rate')
     parser.add_argument('--work-dir', help='the dir to save logs and models')
     parser.add_argument(
         '--amp',
@@ -66,6 +70,24 @@ def main():
 
     # load config
     cfg = Config.fromfile(args.config)
+    try:
+        if cfg.train_dataloader.batch_size is not None and args.train_batch_size != cfg.train_dataloader.batch_size:
+            cfg.train_dataloader.batch_size = args.train_batch_size
+            print(Fore.GREEN + f"overwrite train_batch_size from {cfg.train_dataloader.batch_size} to {args.train_batch_size}")
+    except Exception as e:
+        print(Fore.RED + e)
+    try:
+        if cfg.val_dataloader.batch_size is not None and args.val_batch_size != cfg.val_dataloader.batch_size:
+            cfg.val_dataloader.batch_size = args.val_batch_size
+            print(Fore.GREEN + f"overwrite val_batch_size from {cfg.val_dataloader.batch_size} to {args.val_batch_size}")
+    except Exception as e:
+        print(Fore.RED + e)
+    try:
+        if cfg.optim_wrapper.optimizer.lr is not None and args.lr != cfg.optim_wrapper.optimizer.lr:
+            print(Fore.GREEN + f"overwrite lr from {cfg.optim_wrapper.optimizer.lr} to {args.lr}")
+            cfg.optim_wrapper.optimizer.lr= args.lr
+    except Exception as e:
+        print(Fore.RED + e)
     cfg.launcher = args.launcher
     if args.cfg_options is not None:
         cfg.merge_from_dict(args.cfg_options)
