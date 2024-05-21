@@ -179,7 +179,7 @@ wandb:           memory 61235
 wandb:             time 0.46916
 ```
 
-3. max_epochs = 20, lr = 0.001, val_batch_size, train_batch_size = 12
+3. max_epochs = 20, lr = 0.001, val_batch_size, train_batch_size = 12, by dino-4scale_r50_8xb2 12e checkpoints
 
 GPU : 75G on A100
 
@@ -196,7 +196,34 @@ visualize result, refer to [VISUALIZATION](https://mmdetection.readthedocs.io/en
 python tools/test.py configs/dino/dino-4scale_r50_8xb2-12e_mobile.py /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-12e_mobile/epoch_20.pth --show-dir dino-4scale_r50_8xb2-12e_mobile_imgs/
 ```
 
-4, max_epochs = 20, lr = 0.001, val_batch_size, train_batch_size = 12
+After correction of data:
+
+Result: 
+
+```bash
+938  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.739
+939  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=1000 ] = 0.870
+940  Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=1000 ] = 0.817
+941  Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.000
+942  Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.689
+943  Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.755
+944  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.834
+945  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=300 ] = 0.869
+946  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=1000 ] = 0.869
+947  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.000
+948  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.787
+949  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.877
+950 05/21 07:24:19 - mmengine - INFO - bbox_mAP_copypaste: 0.739 0.870 0.817 0.000 0.689 0.755
+951 05/21 07:24:19 - mmengine - INFO - Epoch(val) [20][19/19]    coco/bbox_mAP: 0.7390  coco/bbox_mAP_50: 0.8700  coco/bbox_mAP_75: 0.8170  coco/bbox_mAP_s: 0.0000  coco/bbox_mAP_m: 0.6890  coco/bbox_mAP_l: 0.7550  data_time: 0.0565  time: 0.4842
+```
+
+```bash
+python tools/test.py configs/dino/dino-4scale_r50_8xb2-12e_mobile.py /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-12e_mobile/epoch_20.pth --show-dir dino-4scale_r50_8xb2-12e_mobile_imgs/
+```
+
+result in /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-12e_mobile/20240521_153517/dino-4scale_r50_8xb2-12e_mobile_imgs
+
+4, max_epochs = 20, lr = 0.001, val_batch_size = 3, train_batch_size = 2, loaded from https://github.com/RistoranteRist/mmlab-weights/releases/download/dino-swinl/dino-5scale_swin-l_8xb2-36e_coco-5486e051.pth
 
 GPU : 75G on A100
 
@@ -204,7 +231,7 @@ Command:
 
 ```bash
 export CUDA_VISIBLE_DEVICES=1
-python tools/train.py configs/dino/dino-5scale_swin-l_8xb2-36e_mobile.py --train_batch_size 4 --val_batch_size 2 --lr 0.001 --epoch 36
+python tools/train.py configs/dino/dino-5scale_swin-l_8xb2-36e_mobile.py --train_batch_size 3 --val_batch_size 2 --lr 0.001 --epoch 20 # --train_batch_size 4 out of memory
 ```
 
 visualize result, refer to [VISUALIZATION](https://mmdetection.readthedocs.io/en/latest/user_guides/visualization.html)
@@ -212,3 +239,82 @@ visualize result, refer to [VISUALIZATION](https://mmdetection.readthedocs.io/en
 ```bash
 python tools/test.py configs/dino/dino-5scale_swin-l_8xb2-36e_mobile.py /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-12e_mobile/epoch_20.pth --show-dir dino-4scale_r50_8xb2-12e_mobile_imgs/
 ```
+
+Result:
+
+```bash
+wandb: Run summary:
+wandb:          base_lr 0.001
+wandb:    coco/bbox_mAP 0.004
+wandb: coco/bbox_mAP_50 0.031
+wandb: coco/bbox_mAP_75 0.001
+wandb:  coco/bbox_mAP_l 0.009
+wandb:  coco/bbox_mAP_m 0.0
+wandb:  coco/bbox_mAP_s 0.0
+wandb:  d0.dn_loss_bbox 1.08605
+wandb:   d0.dn_loss_cls 0.14335
+wandb:   d0.dn_loss_iou 1.15801
+wandb:     d0.loss_bbox 1.01825
+wandb:      d0.loss_cls 0.40777
+wandb:      d0.loss_iou 1.37544
+wandb:  d1.dn_loss_bbox 1.0866
+wandb:   d1.dn_loss_cls 0.1724
+wandb:   d1.dn_loss_iou 1.15929
+wandb:     d1.loss_bbox 0.84916
+wandb:      d1.loss_cls 0.42898
+wandb:      d1.loss_iou 1.2731
+wandb:  d2.dn_loss_bbox 1.05772
+wandb:   d2.dn_loss_cls 0.25497
+wandb:   d2.dn_loss_iou 1.14394
+wandb:     d2.loss_bbox 0.77269
+wandb:      d2.loss_cls 0.43709
+wandb:      d2.loss_iou 1.20997
+wandb:  d3.dn_loss_bbox 1.05863
+wandb:   d3.dn_loss_cls 0.26209
+wandb:   d3.dn_loss_iou 1.14434
+wandb:     d3.loss_bbox 0.77459
+wandb:      d3.loss_cls 0.43016
+wandb:      d3.loss_iou 1.20601
+wandb:  d4.dn_loss_bbox 1.05884
+wandb:   d4.dn_loss_cls 0.27255
+wandb:   d4.dn_loss_iou 1.1471
+wandb:     d4.loss_bbox 0.76086
+wandb:      d4.loss_cls 0.44398
+wandb:      d4.loss_iou 1.20075
+wandb:        data_time 0.00988
+wandb:     dn_loss_bbox 1.06063
+wandb:      dn_loss_cls 0.25748
+wandb:      dn_loss_iou 1.14914
+wandb:    enc_loss_bbox 11.3105
+wandb:     enc_loss_cls 0.42329
+wandb:     enc_loss_iou 2.55191
+wandb:            epoch 3
+wandb:        grad_norm 83.80324
+wandb:             iter 1282
+wandb:             loss 43.94187
+wandb:        loss_bbox 0.76494
+wandb:         loss_cls 0.43017
+wandb:         loss_iou 1.19912
+wandb:               lr 0.001
+wandb:           memory 65078
+wandb:             time 3.61632
+```
+
+5, max_epochs = 20, lr = 0.001, val_batch_size = 3, train_batch_size = 2, loaded from https://github.com/RistoranteRist/mmlab-weights/releases/download/dino-swinl/dino-5scale_swin-l_8xb2-36e_coco-5486e051.pth
+
+GPU : 75G on A100
+
+Command:
+
+```bash
+export CUDA_VISIBLE_DEVICES=1
+python tools/train.py configs/dino/dino-5scale_swin-l_8xb2-12e_mobile.py --train_batch_size 3 --val_batch_size 2 --lr 0.001 --epoch 20 # --train_batch_size 4 out of memory
+```
+
+visualize result, refer to [VISUALIZATION](https://mmdetection.readthedocs.io/en/latest/user_guides/visualization.html)
+
+```bash
+python tools/test.py configs/dino/dino-5scale_swin-l_8xb2-12e_mobile /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-12e_mobile/epoch_20.pth --show-dir dino-5scale_swin-l_8xb2-12e_mobile_imgs/
+```
+
+Result:

@@ -30,4 +30,4 @@ model = dict(
     encoder=dict(layer_cfg=dict(self_attn_cfg=dict(num_levels=num_levels))),
     decoder=dict(layer_cfg=dict(cross_attn_cfg=dict(num_levels=num_levels))))
 
-load_from = "https://download.openmmlab.com/mmdetection/v3.0/dino/dino-5scale_swin-l_8xb2-12e_coco/dino-5scale_swin-l_8xb2-12e_coco_20230228_072924-a654145f.pth" # none
+load_from = "https://github.com/RistoranteRist/mmlab-weights/releases/download/dino-swinl/dino-5scale_swin-l_8xb2-36e_coco-5486e051.pth" # none

@@ -11,3 +11,5 @@ param_scheduler = [
         milestones=[27, 33],
         gamma=0.1)
 ]
+
+load_from = "https://github.com/RistoranteRist/mmlab-weights/releases/download/dino-swinl/dino-5scale_swin-l_8xb2-36e_coco-5486e051.pth" # none
