@@ -18,10 +18,6 @@ generate configs/dino/convert_mobile_segement_to_coco.py and prepare data in con
 
 2. [configs/dino/dino-4scale_r50_8xb2-12e_mobile.py](configs/dino/dino-4scale_r50_8xb2-12e_mobile.py) build model
 
-```bash
-export CUDA_VISIBLE_DEVICES=1
-python tools/train.py configs/dino/dino-4scale_r50_8xb2-12e_mobile.py
-```
 
 ### Result on different settings
 
@@ -41,7 +37,14 @@ pip install wandb
 
 GPU : 42G on A100
 
-Settings: 
+Command:
+
+```bash
+export CUDA_VISIBLE_DEVICES=1
+python tools/train.py configs/dino/dino-4scale_r50_8xb2-12e_mobile.py
+```
+
+Result: 
 
 ```bash
 05/20 23:48:53 - mmengine - INFO - Epoch(val) [2][37/37]    coco/bbox_mAP: 0.1760  coco/bbox_mAP_50: 0.2950  coco/bbox_mAP_75: 0.1830  coco/bbox_mAP_s: 0.0000  coco/bbox_mAP_m: 0.1910  coco/bbox_mAP_l: 0.1910  data_time: 0.0209  time: 0.2734
@@ -104,4 +107,15 @@ wandb:             time 0.27344
 ```
 
 
-2. max_epochs = 12
+2. max_epochs = 12, lr = 0.001, val_batch_size, train_batch_size = 12
+
+GPU : 75G on A100
+
+Command:
+
+```bash
+export CUDA_VISIBLE_DEVICES=1
+python tools/train.py configs/dino/dino-4scale_r50_8xb2-12e_mobile.py --train_batch_size 12 --val_batch_size 12 --lr 0.001
+```
+
+Result: 

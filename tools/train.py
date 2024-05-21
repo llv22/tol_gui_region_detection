@@ -17,6 +17,7 @@ def parse_args():
     parser.add_argument('--train_batch_size', type=int, default=6, help='train batch size')
     parser.add_argument('--val_batch_size', type=int, default=6, help='val batch size')
     parser.add_argument('--lr', type=float, default=0.001, help='learning rate')
+    parser.add_argument('--epoch', type=int, default=12, help='number of epochs to train')
     parser.add_argument('--work-dir', help='the dir to save logs and models')
     parser.add_argument(
         '--amp',
@@ -71,15 +72,21 @@ def main():
     # load config
     cfg = Config.fromfile(args.config)
     try:
+        if cfg.max_epochs is not None and args.epoch != cfg.max_epochs:
+            print(Fore.GREEN + f"overwrite max_epochs from {cfg.max_epochs} to {args.epoch}")
+            cfg.max_epochs = args.epoch
+    except Exception as e:
+        print(Fore.RED + e)
+    try:
         if cfg.train_dataloader.batch_size is not None and args.train_batch_size != cfg.train_dataloader.batch_size:
-            cfg.train_dataloader.batch_size = args.train_batch_size
             print(Fore.GREEN + f"overwrite train_batch_size from {cfg.train_dataloader.batch_size} to {args.train_batch_size}")
+            cfg.train_dataloader.batch_size = args.train_batch_size
     except Exception as e:
         print(Fore.RED + e)
     try:
         if cfg.val_dataloader.batch_size is not None and args.val_batch_size != cfg.val_dataloader.batch_size:
-            cfg.val_dataloader.batch_size = args.val_batch_size
             print(Fore.GREEN + f"overwrite val_batch_size from {cfg.val_dataloader.batch_size} to {args.val_batch_size}")
+            cfg.val_dataloader.batch_size = args.val_batch_size
     except Exception as e:
         print(Fore.RED + e)
     try:
