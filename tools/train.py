@@ -72,9 +72,9 @@ def main():
     # load config
     cfg = Config.fromfile(args.config)
     try:
-        if cfg.max_epochs is not None and args.epoch != cfg.max_epochs:
-            print(Fore.GREEN + f"overwrite max_epochs from {cfg.max_epochs} to {args.epoch}")
-            cfg.max_epochs = args.epoch
+        if cfg.train_cfg.max_epochs is not None and args.epoch != cfg.train_cfg.max_epochs:
+            print(Fore.GREEN + f"overwrite max_epochs from {cfg.train_cfg.max_epochs} to {args.epoch}")
+            cfg.train_cfg.max_epochs = args.epoch
     except Exception as e:
         print(Fore.RED + e)
     try:

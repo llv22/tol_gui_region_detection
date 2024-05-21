@@ -33,11 +33,11 @@ def convert_mobile_segment_to_coco(ann_file, out_file, image_prefix):
                         image_id=idx,
                         id=obj_count,
                         category_id=0,
-                        bbox=[x, y, x + w, y + h],
+                        bbox=[x, y, w, h],
                         area=h * w,
                         control_id=control_id,
                         json_file=k,
-                        segmentation=[poly],
+                        # segmentation=[poly],
                         iscrowd=0)
                     annotations.append(data_anno)
                     obj_count += 1
