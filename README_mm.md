@@ -403,3 +403,7 @@ Test data folder: [test_screendata/data](test_screendata/data)
 Reference:
 
 * [Inferencer](https://github.com/open-mmlab/mmdetection/blob/main/demo/inference_demo.ipynb)
+
+```bash
+python inference_test_screendata.py
+```
