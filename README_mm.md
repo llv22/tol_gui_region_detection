@@ -318,3 +318,88 @@ python tools/test.py configs/dino/dino-5scale_swin-l_8xb2-12e_mobile /home/xiand
 ```
 
 Result:
+
+```bash
+1983  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.061
+1984  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=1000 ] = 0.121
+1985  Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=1000 ] = 0.058
+1986  Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.000
+1987  Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.024
+1988  Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.071
+1989  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.164
+1990  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=300 ] = 0.252
+1991  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=1000 ] = 0.252
+1992  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.000
+1993  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.041
+1994  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.273
+1995 05/22 03:31:51 - mmengine - INFO - bbox_mAP_copypaste: 0.061 0.121 0.058 0.000 0.024 0.071
+1996 05/22 03:31:51 - mmengine - INFO - Epoch(val) [20][109/109]    coco/bbox_mAP: 0.0610  coco/bbox_mAP_50: 0.1210  coco/bbox_mAP_75: 0.0580  coco/bbox_mAP_s: 0.0000  coco/bbox_mAP_m: 0.0240  coco/bbox_mAP_l: 0.0710  data_time: 0.0052  time: 0.4794
+```
+
+6, max_epochs = 36, lr = 0.001, val_batch_size = 10, train_batch_size = 2, loaded from https://download.openmmlab.com/mmdetection/v3.0/dino/dino-4scale_r50_improved_8xb2-12e_coco/dino-4scale_r50_improved_8xb2-12e_coco_20230818_162607-6f47a913.pt
+
+Status: **current best-performed model**
+
+GPU : 75G on A100
+
+Command:
+
+```bash
+export CUDA_VISIBLE_DEVICES=1
+python tools/train.py configs/dino/dino-4scale_r50_8xb2-36e_mobile.py --train_batch_size 10 --val_batch_size 10 --lr 0.001 --epoch 36 # 12 out of memory during 16
+```
+
+Result:
+
+```bash
+1406  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.856
+1407  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=1000 ] = 0.920
+1408  Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=1000 ] = 0.886
+1409  Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.000
+1410  Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.846
+1411  Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.864
+1412  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.898
+1413  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=300 ] = 0.915
+1414  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=1000 ] = 0.915
+1415  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.000
+1416  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.892
+1417  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.917
+1418 05/22 09:32:29 - mmengine - INFO - bbox_mAP_copypaste: 0.856 0.920 0.886 0.000 0.846 0.864
+1419 05/22 09:32:29 - mmengine - INFO - Epoch(val) [36][22/22]    coco/bbox_mAP: 0.8560  coco/bbox_mAP_50: 0.9200  coco/bbox_mAP_75: 0.8860  coco/bbox_mAP_s: 0.0000  coco/bbox_mAP_m: 0.8460  coco/bbox_mAP_l: 0.8640  data_time: 0.0343  time: 0.4361
+```
+
+visualize result
+
+```bash
+python tools/test.py configs/dino/dino-4scale_r50_8xb2-36e_mobile.py /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-36e_mobile/epoch_36.pth --show-dir dino-4scale_r50_8xb2-36e_mobile_imgs/
+```
+
+val result:
+
+```bash
+DONE (t=27.55s).
+Accumulating evaluation results...
+DONE (t=1.26s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.857
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=1000 ] = 0.920
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=1000 ] = 0.886
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.846
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.864
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.898
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=300 ] = 0.915
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=1000 ] = 0.915
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.892
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.917
+05/22 15:44:09 - mmengine - INFO - bbox_mAP_copypaste: 0.857 0.920 0.886 0.000 0.846 0.864
+05/22 15:44:09 - mmengine - INFO - Epoch(test) [37/37]    coco/bbox_mAP: 0.8570  coco/bbox_mAP_50: 0.9200  coco/bbox_mAP_75: 0.8860  coco/bbox_mAP_s: 0.0000  coco/bbox_mAP_m: 0.8460  coco/bbox_mAP_l: 0.8640  data_time: 4.0555  time: 4.3898
+```
+
+### Inference on test data
+
+Test data folder: [test_screendata/data](test_screendata/data)
+
+Reference:
+
+* [Inferencer](https://github.com/open-mmlab/mmdetection/blob/main/demo/inference_demo.ipynb)
