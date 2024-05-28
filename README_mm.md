@@ -41,7 +41,7 @@ Command:
 
 ```bash
 export CUDA_VISIBLE_DEVICES=1
-python tools/train.py configs/dino/dino-4scale_r50_8xb2-12e_mobile.py/home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/data/train2017
+python tools/train.py configs/dino/dino-4scale_r50_8xb2-12e_mobile.py /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/data/train2017
 /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/data/val2017
 ```
 
