@@ -396,6 +396,66 @@ DONE (t=1.26s).
 05/22 15:44:09 - mmengine - INFO - Epoch(test) [37/37]    coco/bbox_mAP: 0.8570  coco/bbox_mAP_50: 0.9200  coco/bbox_mAP_75: 0.8860  coco/bbox_mAP_s: 0.0000  coco/bbox_mAP_m: 0.8460  coco/bbox_mAP_l: 0.8640  data_time: 4.0555  time: 4.3898
 ```
 
+7, small_bbox, max_epochs = 36, lr = 0.001, val_batch_size = 10, train_batch_size = 2, loaded from https://download.openmmlab.com/mmdetection/v3.0/dino/dino-4scale_r50_improved_8xb2-12e_coco/dino-4scale_r50_improved_8xb2-12e_coco_20230818_162607-6f47a913.pt
+
+GPU : 75G on A100
+
+Command:
+
+```bash
+export CUDA_VISIBLE_DEVICES=0
+python tools/train.py configs/dino/dino-4scale_r50_8xb2-36e_mobile_large_bbox.py --train_batch_size 10 --val_batch_size 10 --lr 0.001 --epoch 36 # 12 out of memory during 16
+```
+
+Result:
+
+```bash
+```
+
+8, large_bbox, max_epochs = 36, lr = 0.001, val_batch_size = 10, train_batch_size = 2, loaded from https://download.openmmlab.com/mmdetection/v3.0/dino/dino-4scale_r50_improved_8xb2-12e_coco/dino-4scale_r50_improved_8xb2-12e_coco_20230818_162607-6f47a913.pt
+
+GPU : 75G on A100
+
+Command:
+
+```bash
+export CUDA_VISIBLE_DEVICES=1
+python tools/train.py configs/dino/dino-4scale_r50_8xb2-36e_mobile_small_bbox.py --train_batch_size 10 --val_batch_size 10 --lr 0.001 --epoch 36 # 12 out of memory during 16
+```
+
+Result:
+
+```bash
+```
+
+### Inference on test data
+
+Test data folder: [test_screendata/data](test_screendata/data)
+
+Reference:
+
+* [Inferencer](https://github.com/open-mmlab/mmdetection/blob/main/demo/inference_demo.ipynb)
+
+```bash
+python inference_test_screendata.py
+```
+
+9, large_bbox, max_epochs = 12, lr = 0.001, val_batch_size = 10, train_batch_size = 2, loaded from https://download.openmmlab.com/mmdetection/v3.0/dino/dino-5scale_swin-l_8xb2-12e_coco/dino-5scale_swin-l_8xb2-12e_coco_20230228_072924-a654145f.pth
+
+GPU : 75G on A100
+
+Command:
+
+```bash
+export CUDA_VISIBLE_DEVICES=1
+python tools/train.py configs/dino/dino-5scale_swin-l_8xb2-12e_mobile_large_bbox.py --train_batch_size 3 --val_batch_size 2 --lr 0.001 --epoch 12 # 12 out of memory during 16
+```
+
+Result:
+
+```bash
+```
+
 ### Inference on test data
 
 Test data folder: [test_screendata/data](test_screendata/data)
