@@ -55,8 +55,8 @@ def conf():
     args.add_argument("--val_ann_file", type=str, default="../../../../ScreenReaderData_val.json")
     args.add_argument("--val_out_file", type=str, default="data/val/annotation_coco.json")
     args.add_argument("--image_prefix", type=str, default="../../../../")
-    # args.add_argument("--target_label", type=str, default="small_bbox")
-    args.add_argument("--target_label", type=str, default="large_bbox")
+    args.add_argument("--target_label", type=str, default="small_bbox")
+    # args.add_argument("--target_label", type=str, default="large_bbox")
     return args.parse_args()
 
 def refine_file_name(filePath:Path, label:str):
