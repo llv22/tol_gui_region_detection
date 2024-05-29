@@ -500,6 +500,25 @@ Visualization:
   
 ```
 
+
+10, large_bbox, max_epochs = 12, lr = 0.001, val_batch_size = 10, train_batch_size = 2, loaded from https://download.openmmlab.com/mmdetection/v3.0/dino/dino-5scale_swin-l_8xb2-12e_coco/dino-5scale_swin-l_8xb2-12e_coco_20230228_072924-a654145f.pth
+
+GPU : 75G on A100
+
+Command:
+
+```bash
+export CUDA_VISIBLE_DEVICES=1
+python tools/train.py configs/dino/dino-5scale_swin-l_8xb2-12e_mobile_large_bbox.py --train_batch_size 3 --val_batch_size 2 --lr 0.001 --epoch 12 # 12 out of memory during 16
+# distributed training
+./tools/dist_train_custom.sh configs/dino/dino-5scale_swin-l_8xb2-12e_mobile_large_bbox.py 4
+```
+
+Result:
+
+```bash
+```
+
 ### Inference on test data
 
 Test data folder: [test_screendata/data](test_screendata/data)
