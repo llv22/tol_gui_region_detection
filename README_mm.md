@@ -477,7 +477,9 @@ Preparation:
 1, generate new annotations + classes in multiclass label + configuration file
 2, change model's head class
 
-GPU : 2*75G on A100
+GPU : 2*75G on A100 (Best result until now)
+
+* Case 1: 36e_mobile_multi_bbox
 
 Command:
 
@@ -529,6 +531,19 @@ Visualization & Val result:
 05/29 07:52:42 - mmengine - INFO - bbox_mAP_copypaste: 0.920 0.953 0.929 0.900 0.866 0.921
 05/29 07:52:42 - mmengine - INFO - Epoch(test) [37/37]    coco/bbox_mAP: 0.9200  coco/bbox_mAP_50: 0.9530  coco/bbox_mAP_75: 0.9290  coco/bbox_mAP_s: 0.9000  coco/bbox_mAP_m: 0.8660  coco/bbox_mAP_l: 0.9210  data_time: 3.7632  time: 4.0880
 ```
+
+* Case 2: 36e_mobile_multi_bbox
+
+Now start a larger epoch with 50:
+
+Command:
+
+```bash
+# distributed training
+export CUDA_VISIBLE_DEVICES=0,1
+./tools/dist_train_custom_multi_bbox.sh configs/dino/dino-4scale_r50_8xb2-36e_mobile_multi_bbox.py 2
+```
+
 
 10, large_bbox, max_epochs = 12, lr = 0.001, val_batch_size = 2, train_batch_size = 2, loaded from https://download.openmmlab.com/mmdetection/v3.0/dino/dino-5scale_swin-l_8xb2-12e_coco/dino-5scale_swin-l_8xb2-12e_coco_20230228_072924-a654145f.pth
 
