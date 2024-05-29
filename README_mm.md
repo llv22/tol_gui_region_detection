@@ -472,7 +472,7 @@ Visualization:
 
 9. multi_bbox, max_epochs = 36, lr = 0.001, val_batch_size = 10, train_batch_size = 2, loaded from https://download.openmmlab.com/mmdetection/v3.0/dino/dino-4scale_r50_improved_8xb2-12e_coco/dino-4scale_r50_improved_8xb2-12e_coco_20230818_162607-6f47a913.pt
 
-Preparation: 
+Preparation:
 
 1, generate new annotations + classes in multiclass label + configuration file
 2, change model's head class
@@ -616,6 +616,24 @@ Result:
 2277  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.379
 2278 05/29 05:18:49 - mmengine - INFO - bbox_mAP_copypaste: 0.189 0.266 0.171 0.000 0.003 0.192
 2279 05/29 05:18:49 - mmengine - INFO - Epoch(val) [36][28/28]    coco/bbox_mAP: 0.1890  coco/bbox_mAP_50: 0.2660  coco/bbox_mAP_75: 0.1710  coco/bbox_mAP_s: 0.0000  coco/bbox_mAP_m: 0.0030  coco/bbox_mAP_l: 0.1920  data_time: 0.0052  time: 0.5684
+```
+
+11, multi_bbox, max_epochs = 12, lr = 0.001, val_batch_size = 10, train_batch_size = 2, loaded from https://download.openmmlab.com/mmdetection/v3.0/dino/dino-5scale_swin-l_8xb2-12e_coco/dino-5scale_swin-l_8xb2-12e_coco_20230228_072924-a654145f.pth
+
+GPU : 75G on A100
+
+Command:
+
+```bash
+export CUDA_VISIBLE_DEVICES=0,1,2,3
+python tools/train.py configs/dino/dino-5scale_swin-l_8xb2-36e_mobile_multi_bbox.py --train_batch_size 2 --val_batch_size 2 --lr 0.001 --epoch 12 # 12 out of memory during 16
+# distributed training
+CUDA_VISIBLE_DEVICES=0,1,2,3 ./tools/dist_train_custom_multi_bbox.sh configs/dino/dino-5scale_swin-l_8xb2-36e_mobile_multi_bbox.py 4
+```
+
+Result:
+
+```bash
 ```
 
 ### Inference on test data
