@@ -491,16 +491,46 @@ export CUDA_VISIBLE_DEVICES=0,1
 Result:
 
 ```bash
+1328  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.920
+1329  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=1000 ] = 0.953
+1330  Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=1000 ] = 0.929
+1331  Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.900
+1332  Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.866
+1333  Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.921
+1334  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.945
+1335  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=300 ] = 0.947
+1336  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=1000 ] = 0.947
+1337  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.900
+1338  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.893
+1339  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.948
+1340 05/29 00:23:12 - mmengine - INFO - bbox_mAP_copypaste: 0.920 0.953 0.929 0.900 0.866 0.921
+1341 05/29 00:23:12 - mmengine - INFO - Epoch(val) [36][11/11]    coco/bbox_mAP: 0.9200  coco/bbox_mAP_50: 0.9530  coco/bbox_mAP_75: 0.9290  coco/bbox_mAP_s: 0.9000  coco/bbox_mAP_m: 0.8660  coco/bbox_mAP_l: 0.9210  data_time: 0.0500  time: 0.4395
+```
+
+```bash
 python tools/test.py configs/dino/dino-4scale_r50_8xb2-36e_mobile_multi_bbox.py /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-36e_mobile_multi_bbox/epoch_36.pth --show-dir dino-4scale_r50_8xb2-36e_mobile_multi_bbox_imgs/
 ```
 
-Visualization:
+Visualization & Val result:
 
 ```bash
-  
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.920
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=1000 ] = 0.953
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=1000 ] = 0.929
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.900
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.866
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.921
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.944
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=300 ] = 0.946
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=1000 ] = 0.946
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.900
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.893
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.948
+05/29 07:52:42 - mmengine - INFO - bbox_mAP_copypaste: 0.920 0.953 0.929 0.900 0.866 0.921
+05/29 07:52:42 - mmengine - INFO - Epoch(test) [37/37]    coco/bbox_mAP: 0.9200  coco/bbox_mAP_50: 0.9530  coco/bbox_mAP_75: 0.9290  coco/bbox_mAP_s: 0.9000  coco/bbox_mAP_m: 0.8660  coco/bbox_mAP_l: 0.9210  data_time: 3.7632  time: 4.0880
 ```
 
-10, large_bbox, max_epochs = 12, lr = 0.001, val_batch_size = 10, train_batch_size = 2, loaded from https://download.openmmlab.com/mmdetection/v3.0/dino/dino-5scale_swin-l_8xb2-12e_coco/dino-5scale_swin-l_8xb2-12e_coco_20230228_072924-a654145f.pth
+10, large_bbox, max_epochs = 12, lr = 0.001, val_batch_size = 2, train_batch_size = 2, loaded from https://download.openmmlab.com/mmdetection/v3.0/dino/dino-5scale_swin-l_8xb2-12e_coco/dino-5scale_swin-l_8xb2-12e_coco_20230228_072924-a654145f.pth
 
 GPU : 75G on A100
 
@@ -516,6 +546,20 @@ python tools/train.py configs/dino/dino-5scale_swin-l_8xb2-12e_mobile_large_bbox
 Result:
 
 ```bash
+2266  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.189
+2267  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=1000 ] = 0.266
+2268  Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=1000 ] = 0.171
+2269  Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.000
+2270  Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.003
+2271  Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.192
+2272  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.352
+2273  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=300 ] = 0.373
+2274  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=1000 ] = 0.373
+2275  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.000
+2276  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.048
+2277  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.379
+2278 05/29 05:18:49 - mmengine - INFO - bbox_mAP_copypaste: 0.189 0.266 0.171 0.000 0.003 0.192
+2279 05/29 05:18:49 - mmengine - INFO - Epoch(val) [36][28/28]    coco/bbox_mAP: 0.1890  coco/bbox_mAP_50: 0.2660  coco/bbox_mAP_75: 0.1710  coco/bbox_mAP_s: 0.0000  coco/bbox_mAP_m: 0.0030  coco/bbox_mAP_l: 0.1920  data_time: 0.0052  time: 0.5684
 ```
 
 ### Inference on test data
@@ -544,4 +588,11 @@ python inference_test_screendata.py --input_folder ../../test_screendata/osworld
 ```bash
 export CUDA_VISIBLE_DEVICES=1
 python inference_test_screendata.py --input_folder ../../test_screendata/osworld --model_config configs/dino/dino-4scale_r50_8xb2-36e_mobile_large_bbox.py --checkpoint /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-36e_mobile_large_bbox/epoch_36.pth && python inference_test_screendata.py --input_folder ../../test_screendata/mobile_pc_web --model_config configs/dino/dino-4scale_r50_8xb2-36e_mobile_large_bbox.py --checkpoint /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-36e_mobile_large_bbox/epoch_36.pth
+```
+
+#### Inference for multi_bbox
+
+```bash
+export CUDA_VISIBLE_DEVICES=0
+python inference_test_screendata.py --input_folder ../../test_screendata/mobile_pc_web_osworld --model_config configs/dino/dino-4scale_r50_8xb2-36e_mobile_multi_bbox.py --checkpoint /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-36e_mobile_multi_bbox/epoch_36.pth
 ```
