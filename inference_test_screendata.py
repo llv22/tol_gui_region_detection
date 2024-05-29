@@ -10,7 +10,7 @@ def conf():
     argparser.add_argument("--input_folder", type=str, default="../../test_screendata/osworld")
     argparser.add_argument("--model_config", type=str, default="configs/dino/dino-4scale_r50_8xb2-36e_mobile.py")
     argparser.add_argument("--checkpoint", type=str, default="work_dirs/dino-4scale_r50_8xb2-36e_mobile/epoch_36.pth")
-    argparser.add_argument("--batch_size", type=int, default=96)
+    argparser.add_argument("--batch_size", type=int, default=64)
     argparser.add_argument("--img_type", type=str, default="png;jpg")
     return argparser.parse_args()
 
@@ -19,7 +19,7 @@ if __name__ == "__main__":
     conf_file = Path(args.model_config)
     input_file = Path(args.input_folder)
     input_folder_name = input_file.stem
-    output_folder_path = Path(f"{input_file.parent.__str__()}/output_{input_folder_name}")
+    output_folder_path = Path(f"{input_file.parent.__str__()}/output_{conf_file.stem}_{input_folder_name}")
     if not output_folder_path.exists():
         output_folder_path.mkdir(parents=True)
     output_folder_path_s = output_folder_path.__str__()
