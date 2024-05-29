@@ -493,20 +493,6 @@ export CUDA_VISIBLE_DEVICES=0,1
 Result:
 
 ```bash
-1328  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.920
-1329  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=1000 ] = 0.953
-1330  Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=1000 ] = 0.929
-1331  Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.900
-1332  Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.866
-1333  Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.921
-1334  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.945
-1335  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=300 ] = 0.947
-1336  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=1000 ] = 0.947
-1337  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.900
-1338  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.893
-1339  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.948
-1340 05/29 00:23:12 - mmengine - INFO - bbox_mAP_copypaste: 0.920 0.953 0.929 0.900 0.866 0.921
-1341 05/29 00:23:12 - mmengine - INFO - Epoch(val) [36][11/11]    coco/bbox_mAP: 0.9200  coco/bbox_mAP_50: 0.9530  coco/bbox_mAP_75: 0.9290  coco/bbox_mAP_s: 0.9000  coco/bbox_mAP_m: 0.8660  coco/bbox_mAP_l: 0.9210  data_time: 0.0500  time: 0.4395
 ```
 
 ```bash
@@ -532,18 +518,73 @@ Visualization & Val result:
 05/29 07:52:42 - mmengine - INFO - Epoch(test) [37/37]    coco/bbox_mAP: 0.9200  coco/bbox_mAP_50: 0.9530  coco/bbox_mAP_75: 0.9290  coco/bbox_mAP_s: 0.9000  coco/bbox_mAP_m: 0.8660  coco/bbox_mAP_l: 0.9210  data_time: 3.7632  time: 4.0880
 ```
 
-* Case 2: 36e_mobile_multi_bbox
-
-Now start a larger epoch with 50:
+* Case 2: 36e_mobile_multi_bbox with epoch 50:
 
 Command:
 
 ```bash
 # distributed training
 export CUDA_VISIBLE_DEVICES=0,1
-./tools/dist_train_custom_multi_bbox.sh configs/dino/dino-4scale_r50_8xb2-36e_mobile_multi_bbox.py 2
+./tools/dist_train_custom_multi_bbox.sh configs/dino/dino-4scale_r50_8xb2-50e_mobile_multi_bbox.py 2
 ```
 
+```bash
+python tools/test.py configs/dino/dino-4scale_r50_8xb2-50e_mobile_multi_bbox.py /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-50e_mobile_multi_bbox/epoch_50.pth --show-dir dino-4scale_r50_8xb2-50e_mobile_multi_bbox_imgs/
+```
+
+Visualization & Val result:
+
+```bash 
+# epoch 36 checkpoint
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.923
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=1000 ] = 0.953
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=1000 ] = 0.933
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.715
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.874
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.924
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.946
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=300 ] = 0.949
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=1000 ] = 0.949
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.714
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.896
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.951
+05/29 11:09:02 - mmengine - INFO - bbox_mAP_copypaste: 0.923 0.953 0.933 0.715 0.874 0.924
+05/29 11:09:02 - mmengine - INFO - Epoch(test) [37/37]    coco/bbox_mAP: 0.9230  coco/bbox_mAP_50: 0.9530  coco/bbox_mAP_75: 0.9330  coco/bbox_mAP_s: 0.7150  coco/bbox_mAP_m: 0.8740  coco/bbox_mAP_l: 0.9240  data_time: 3.9394  time: 4.5280
+# epoch 50 checkpoint
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.935
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=1000 ] = 0.960
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=1000 ] = 0.941
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.985
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.889
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.935
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.953
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=300 ] = 0.955
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=1000 ] = 0.955
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.986
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.907
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.957
+05/29 11:29:21 - mmengine - INFO - bbox_mAP_copypaste: 0.935 0.960 0.941 0.985 0.889 0.935
+05/29 11:29:21 - mmengine - INFO - Epoch(test) [37/37]    coco/bbox_mAP: 0.9350  coco/bbox_mAP_50: 0.9600  coco/bbox_mAP_75: 0.9410  coco/bbox_mAP_s: 0.9850  coco/bbox_mAP_m: 0.8890  coco/bbox_mAP_l: 0.9350  data_time: 3.8533  time: 4.1884
+```
+
+* Case 3: 90e_mobile_multi_bbox with epoch 90:
+
+Command:
+
+```bash
+# distributed training
+export CUDA_VISIBLE_DEVICES=0,1
+./tools/dist_train_custom_multi_bbox.sh configs/dino/dino-4scale_r50_8xb2-90e_mobile_multi_bbox.py 2
+```
+
+```bash
+python tools/test.py configs/dino/dino-4scale_r50_8xb2-90e_mobile_multi_bbox.py /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-90e_mobile_multi_bbox/epoch_90.pth --show-dir dino-4scale_r50_8xb2-90e_mobile_multi_bbox_imgs/
+```
+
+Visualization & Val result:
+
+```bash
+```
 
 10, large_bbox, max_epochs = 12, lr = 0.001, val_batch_size = 2, train_batch_size = 2, loaded from https://download.openmmlab.com/mmdetection/v3.0/dino/dino-5scale_swin-l_8xb2-12e_coco/dino-5scale_swin-l_8xb2-12e_coco_20230228_072924-a654145f.pth
 
@@ -607,7 +648,16 @@ python inference_test_screendata.py --input_folder ../../test_screendata/osworld
 
 #### Inference for multi_bbox
 
+1. epoch 36
+
 ```bash
 export CUDA_VISIBLE_DEVICES=0
 python inference_test_screendata.py --input_folder ../../test_screendata/mobile_pc_web_osworld --model_config configs/dino/dino-4scale_r50_8xb2-36e_mobile_multi_bbox.py --checkpoint /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-36e_mobile_multi_bbox/epoch_36.pth
+```
+
+2. epoch 50
+
+```bash
+export CUDA_VISIBLE_DEVICES=0
+python inference_test_screendata.py --input_folder ../../test_screendata/mobile_pc_web_osworld --model_config configs/dino/dino-4scale_r50_8xb2-50e_mobile_multi_bbox.py --checkpoint /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-50e_mobile_multi_bbox/epoch_50.pth
 ```
