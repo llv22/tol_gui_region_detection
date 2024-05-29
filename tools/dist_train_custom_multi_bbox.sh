@@ -16,5 +16,5 @@ python -m torch.distributed.launch \
     --master_port=$PORT \
     $(dirname "$0")/train.py \
     $CONFIG \
-    --train_batch_size 10 --val_batch_size 10 --lr 0.001 --epoch 50 \
+    --train_batch_size 5 --val_batch_size 5 --lr 0.001 --epoch 90 \
     --launcher pytorch ${@:3}

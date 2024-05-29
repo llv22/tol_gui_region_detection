@@ -573,12 +573,12 @@ Command:
 
 ```bash
 # distributed training
-export CUDA_VISIBLE_DEVICES=0,1
-./tools/dist_train_custom_multi_bbox.sh configs/dino/dino-4scale_r50_8xb2-90e_mobile_multi_bbox.py 2
+export CUDA_VISIBLE_DEVICES=0,1,2,3
+./tools/dist_train_custom_multi_bbox.sh configs/dino/dino-4scale_r50_8xb2-90e_mobile_multi_bbox.py 4
 ```
 
 ```bash
-python tools/test.py configs/dino/dino-4scale_r50_8xb2-90e_mobile_multi_bbox.py /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-90e_mobile_multi_bbox/epoch_90.pth --show-dir dino-4scale_r50_8xb2-90e_mobile_multi_bbox_imgs/
+python tools/test.py configs/dino/dino-4scale_r50_8xb2-90e_mobile_multi_bbox.py /data/orlando/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-90e_mobile_multi_bbox/epoch_90.pth --show-dir dino-4scale_r50_8xb2-90e_mobile_multi_bbox_imgs/
 ```
 
 Visualization & Val result:
@@ -678,4 +678,11 @@ python inference_test_screendata.py --input_folder ../../test_screendata/mobile_
 ```bash
 export CUDA_VISIBLE_DEVICES=0
 python inference_test_screendata.py --input_folder ../../test_screendata/mobile_pc_web_osworld --model_config configs/dino/dino-4scale_r50_8xb2-50e_mobile_multi_bbox.py --checkpoint /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-50e_mobile_multi_bbox/epoch_50.pth
+```
+
+3. epoch 90
+
+```bash
+export CUDA_VISIBLE_DEVICES=0
+python inference_test_screendata.py --input_folder ../../test_screendata/mobile_pc_web_osworld --model_config configs/dino/dino-4scale_r50_8xb2-90e_mobile_multi_bbox.py --checkpoint /data/orlando/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-90e_mobile_multi_bbox/epoch_90.pth
 ```
