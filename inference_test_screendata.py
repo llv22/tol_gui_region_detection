@@ -7,9 +7,9 @@ from time import time
 
 def conf():
     argparser = argparse.ArgumentParser()
-    argparser.add_argument("--input_folder", type=str, default="../../test_screendata/osworld")
-    argparser.add_argument("--model_config", type=str, default="configs/dino/dino-4scale_r50_8xb2-36e_mobile.py")
-    argparser.add_argument("--checkpoint", type=str, default="work_dirs/dino-4scale_r50_8xb2-36e_mobile/epoch_36.pth")
+    argparser.add_argument("--input_folder", type=str, default="../../test_screendata/mobile_pc_web_osworld")
+    argparser.add_argument("--model_config", type=str, default="configs/dino/dino-4scale_r50_8xb2-90e_mobile_multi_bbox.py")
+    argparser.add_argument("--checkpoint", type=str, default="work_dirs/dino-4scale_r50_8xb2-90e_mobile_multi_bbox/epoch_90.pth")
     argparser.add_argument("--batch_size", type=int, default=64)
     argparser.add_argument("--img_type", type=str, default="png;jpg")
     return argparser.parse_args()
