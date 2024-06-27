@@ -627,10 +627,6 @@ Result:
 
 Test data folder: [test_screendata/data](test_screendata/data) and the weight has been inshared in [DINO weights trained by 90 epoch](https://drive.google.com/file/d/1IN3EfDKyXwu5WegqyFOWfXH6ttJ3zNdx/view?usp=drive_link)
 
-Reference:
-
-* [Inferencer](https://github.com/open-mmlab/mmdetection/blob/main/demo/inference_demo.ipynb)
-
 ```bash
 python inference_test_screendata.py
 ```
@@ -677,10 +673,11 @@ python inference_test_screendata.py --input_folder ../../test_screendata/mobile_
 Reference:
 
 * [Customize Datasets](https://github.com/llv22/mmdetection_forward/blob/develop/docs/en/advanced_guides/customize_dataset.md)
-* [data['category_id'] = self.cat_ids[label] IndexError: list index out of range #4243](https://github.com/open-mmlab/mmdetection/issues/4243)
 * [Dataset customization](https://github.com/open-mmlab/mmdetection/tree/master/docs/en)
 * [CONFIG](https://mmengine.readthedocs.io/en/latest/advanced_tutorials/config.html#import-the-custom-module)
 * [Prepare dataset](https://mmdetection.readthedocs.io/en/latest/user_guides/train.html#prepare-datasets)
 * [Finetune model](https://mmdetection.readthedocs.io/en/latest/user_guides/finetune.html)
 * [Train Object Detector with MMDetection and W&B](https://colab.research.google.com/drive/1-qxf3uuXPJr0QUsIic_4cRLxQ1ZBK3yQ?usp=sharing)
 * [Logging analysis](https://mmdetection.readthedocs.io/en/latest/user_guides/useful_tools.html)
+* [Inferencer on mmdetection DINO](https://github.com/open-mmlab/mmdetection/blob/main/demo/inference_demo.ipynb)
+* [Deal with the issue "data['category_id'] = self.cat_ids[label] IndexError: list index out of range #4243"](https://github.com/open-mmlab/mmdetection/issues/4243)
