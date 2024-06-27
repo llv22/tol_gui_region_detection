@@ -18,7 +18,6 @@ generate configs/dino/convert_mobile_segement_to_coco.py and prepare data in con
 
 2. [configs/dino/dino-4scale_r50_8xb2-12e_mobile.py](configs/dino/dino-4scale_r50_8xb2-12e_mobile.py) build model
 
-
 ### Result on different settings
 
 Reference:
