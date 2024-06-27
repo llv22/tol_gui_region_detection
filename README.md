@@ -1,455 +1,688 @@
-<div align="center">
-  <img src="resources/mmdet-logo.png" width="600"/>
-  <div>&nbsp;</div>
-  <div align="center">
-    <b><font size="5">OpenMMLab website</font></b>
-    <sup>
-      <a href="https://openmmlab.com">
-        <i><font size="4">HOT</font></i>
-      </a>
-    </sup>
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <b><font size="5">OpenMMLab platform</font></b>
-    <sup>
-      <a href="https://platform.openmmlab.com">
-        <i><font size="4">TRY IT OUT</font></i>
-      </a>
-    </sup>
-  </div>
-  <div>&nbsp;</div>
+# ToL Hierarchical GUI region detection
 
-[![PyPI](https://img.shields.io/pypi/v/mmdet)](https://pypi.org/project/mmdet)
-[![docs](https://img.shields.io/badge/docs-latest-blue)](https://mmdetection.readthedocs.io/en/latest/)
-[![badge](https://github.com/open-mmlab/mmdetection/workflows/build/badge.svg)](https://github.com/open-mmlab/mmdetection/actions)
-[![codecov](https://codecov.io/gh/open-mmlab/mmdetection/branch/main/graph/badge.svg)](https://codecov.io/gh/open-mmlab/mmdetection)
-[![license](https://img.shields.io/github/license/open-mmlab/mmdetection.svg)](https://github.com/open-mmlab/mmdetection/blob/main/LICENSE)
-[![open issues](https://isitmaintained.com/badge/open/open-mmlab/mmdetection.svg)](https://github.com/open-mmlab/mmdetection/issues)
-[![issue resolution](https://isitmaintained.com/badge/resolution/open-mmlab/mmdetection.svg)](https://github.com/open-mmlab/mmdetection/issues)
-[![Open in OpenXLab](https://cdn-static.openxlab.org.cn/app-center/openxlab_demo.svg)](https://openxlab.org.cn/apps?search=mmdet)
+## Training for models on mobile
 
-[📘Documentation](https://mmdetection.readthedocs.io/en/latest/) |
-[🛠️Installation](https://mmdetection.readthedocs.io/en/latest/get_started.html) |
-[👀Model Zoo](https://mmdetection.readthedocs.io/en/latest/model_zoo.html) |
-[🆕Update News](https://mmdetection.readthedocs.io/en/latest/notes/changelog.html) |
-[🚀Ongoing Projects](https://github.com/open-mmlab/mmdetection/projects) |
-[🤔Reporting Issues](https://github.com/open-mmlab/mmdetection/issues/new/choose)
+Reference:
 
-</div>
+* [Customize Datasets](https://github.com/llv22/mmdetection_forward/blob/develop/docs/en/advanced_guides/customize_dataset.md)
+* [data['category_id'] = self.cat_ids[label] IndexError: list index out of range #4243](https://github.com/open-mmlab/mmdetection/issues/4243)
+* [Dataset customization](https://github.com/open-mmlab/mmdetection/tree/master/docs/en)
+* [CONFIG](https://mmengine.readthedocs.io/en/latest/advanced_tutorials/config.html#import-the-custom-module)
+* [Prepare dataset](https://mmdetection.readthedocs.io/en/latest/user_guides/train.html#prepare-datasets)
+* [Finetune model](https://mmdetection.readthedocs.io/en/latest/user_guides/finetune.html)
 
-<div align="center">
+### Setup
 
-English | [简体中文](README_zh-CN.md)
+1. [configs/dino/convert_mobile_segement_to_coco.py](configs/dino/convert_mobile_segement_to_coco.py) migrates mobile section to coco dataset
+generate configs/dino/convert_mobile_segement_to_coco.py and prepare data in configs/dino/data
 
-</div>
+2. [configs/dino/dino-4scale_r50_8xb2-12e_mobile.py](configs/dino/dino-4scale_r50_8xb2-12e_mobile.py) build model
 
-<div align="center">
-  <a href="https://openmmlab.medium.com/" style="text-decoration:none;">
-    <img src="https://user-images.githubusercontent.com/25839884/219255827-67c1a27f-f8c5-46a9-811d-5e57448c61d1.png" width="3%" alt="" /></a>
-  <img src="https://user-images.githubusercontent.com/25839884/218346358-56cc8e2f-a2b8-487f-9088-32480cceabcf.png" width="3%" alt="" />
-  <a href="https://discord.com/channels/1037617289144569886/1046608014234370059" style="text-decoration:none;">
-    <img src="https://user-images.githubusercontent.com/25839884/218347213-c080267f-cbb6-443e-8532-8e1ed9a58ea9.png" width="3%" alt="" /></a>
-  <img src="https://user-images.githubusercontent.com/25839884/218346358-56cc8e2f-a2b8-487f-9088-32480cceabcf.png" width="3%" alt="" />
-  <a href="https://twitter.com/OpenMMLab" style="text-decoration:none;">
-    <img src="https://user-images.githubusercontent.com/25839884/218346637-d30c8a0f-3eba-4699-8131-512fb06d46db.png" width="3%" alt="" /></a>
-  <img src="https://user-images.githubusercontent.com/25839884/218346358-56cc8e2f-a2b8-487f-9088-32480cceabcf.png" width="3%" alt="" />
-  <a href="https://www.youtube.com/openmmlab" style="text-decoration:none;">
-    <img src="https://user-images.githubusercontent.com/25839884/218346691-ceb2116a-465a-40af-8424-9f30d2348ca9.png" width="3%" alt="" /></a>
-  <img src="https://user-images.githubusercontent.com/25839884/218346358-56cc8e2f-a2b8-487f-9088-32480cceabcf.png" width="3%" alt="" />
-  <a href="https://space.bilibili.com/1293512903" style="text-decoration:none;">
-    <img src="https://user-images.githubusercontent.com/25839884/219026751-d7d14cce-a7c9-4e82-9942-8375fca65b99.png" width="3%" alt="" /></a>
-  <img src="https://user-images.githubusercontent.com/25839884/218346358-56cc8e2f-a2b8-487f-9088-32480cceabcf.png" width="3%" alt="" />
-  <a href="https://www.zhihu.com/people/openmmlab" style="text-decoration:none;">
-    <img src="https://user-images.githubusercontent.com/25839884/219026120-ba71e48b-6e94-4bd4-b4e9-b7d175b5e362.png" width="3%" alt="" /></a>
-</div>
 
-<div align="center">
-<img src="https://github.com/open-mmlab/mmdetection/assets/17425982/6c29886f-ae7a-4a55-8be4-352ee85b7d3e"/>
-</div>
+### Result on different settings
 
-## Introduction
+Reference:
 
-MMDetection is an open source object detection toolbox based on PyTorch. It is
-a part of the [OpenMMLab](https://openmmlab.com/) project.
+* [Train Object Detector with MMDetection and W&B](https://colab.research.google.com/drive/1-qxf3uuXPJr0QUsIic_4cRLxQ1ZBK3yQ?usp=sharing)
+* [Logging analysis](https://mmdetection.readthedocs.io/en/latest/user_guides/useful_tools.html)
 
-The main branch works with **PyTorch 1.8+**.
+extrat components:
 
-<img src="https://user-images.githubusercontent.com/12907710/187674113-2074d658-f2fb-42d1-ac15-9c4a695e64d7.png"/>
-
-<details open>
-<summary>Major features</summary>
-
-- **Modular Design**
-
-  We decompose the detection framework into different components and one can easily construct a customized object detection framework by combining different modules.
-
-- **Support of multiple tasks out of box**
-
-  The toolbox directly supports multiple detection tasks such as **object detection**, **instance segmentation**, **panoptic segmentation**, and **semi-supervised object detection**.
-
-- **High efficiency**
-
-  All basic bbox and mask operations run on GPUs. The training speed is faster than or comparable to other codebases, including [Detectron2](https://github.com/facebookresearch/detectron2), [maskrcnn-benchmark](https://github.com/facebookresearch/maskrcnn-benchmark) and [SimpleDet](https://github.com/TuSimple/simpledet).
-
-- **State of the art**
-
-  The toolbox stems from the codebase developed by the *MMDet* team, who won [COCO Detection Challenge](http://cocodataset.org/#detection-leaderboard) in 2018, and we keep pushing it forward.
-  The newly released [RTMDet](configs/rtmdet) also obtains new state-of-the-art results on real-time instance segmentation and rotated object detection tasks and the best parameter-accuracy trade-off on object detection.
-
-</details>
-
-Apart from MMDetection, we also released [MMEngine](https://github.com/open-mmlab/mmengine) for model training and [MMCV](https://github.com/open-mmlab/mmcv) for computer vision research, which are heavily depended on by this toolbox.
-
-## What's New
-
-💎 **We have released the pre-trained weights for MM-Grounding-DINO Swin-B and Swin-L, welcome to try and give feedback.**
-
-### Highlight
-
-**v3.3.0** was released in 5/1/2024:
-
-**[MM-Grounding-DINO: An Open and Comprehensive Pipeline for Unified Object Grounding and Detection](https://arxiv.org/abs/2401.02361)**
-
-Grounding DINO is a grounding pre-training model that unifies 2d open vocabulary object detection and phrase grounding, with wide applications. However, its training part has not been open sourced. Therefore, we propose MM-Grounding-DINO, which not only serves as an open source replication version of Grounding DINO, but also achieves significant performance improvement based on reconstructed data types, exploring different dataset combinations and initialization strategies. Moreover, we conduct evaluations from multiple dimensions, including OOD, REC, Phrase Grounding, OVD, and Fine-tune, to fully excavate the advantages and disadvantages of Grounding pre-training, hoping to provide inspiration for future work.
-
-code: [mm_grounding_dino/README.md](configs/mm_grounding_dino/README.md)
-
-<div align=center>
-<img src="https://github.com/open-mmlab/mmdetection/assets/17425982/fb14d1ee-5469-44d2-b865-aac9850c429c"/>
-</div>
-
-We are excited to announce our latest work on real-time object recognition tasks, **RTMDet**, a family of fully convolutional single-stage detectors. RTMDet not only achieves the best parameter-accuracy trade-off on object detection from tiny to extra-large model sizes but also obtains new state-of-the-art performance on instance segmentation and rotated object detection tasks. Details can be found in the [technical report](https://arxiv.org/abs/2212.07784). Pre-trained models are [here](configs/rtmdet).
-
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/rtmdet-an-empirical-study-of-designing-real/real-time-instance-segmentation-on-mscoco)](https://paperswithcode.com/sota/real-time-instance-segmentation-on-mscoco?p=rtmdet-an-empirical-study-of-designing-real)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/rtmdet-an-empirical-study-of-designing-real/object-detection-in-aerial-images-on-dota-1)](https://paperswithcode.com/sota/object-detection-in-aerial-images-on-dota-1?p=rtmdet-an-empirical-study-of-designing-real)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/rtmdet-an-empirical-study-of-designing-real/object-detection-in-aerial-images-on-hrsc2016)](https://paperswithcode.com/sota/object-detection-in-aerial-images-on-hrsc2016?p=rtmdet-an-empirical-study-of-designing-real)
-
-| Task                     | Dataset | AP                                   | FPS(TRT FP16 BS1 3090) |
-| ------------------------ | ------- | ------------------------------------ | ---------------------- |
-| Object Detection         | COCO    | 52.8                                 | 322                    |
-| Instance Segmentation    | COCO    | 44.6                                 | 188                    |
-| Rotated Object Detection | DOTA    | 78.9(single-scale)/81.3(multi-scale) | 121                    |
-
-<div align=center>
-<img src="https://user-images.githubusercontent.com/12907710/208044554-1e8de6b5-48d8-44e4-a7b5-75076c7ebb71.png"/>
-</div>
-
-## Installation
-
-Please refer to [Installation](https://mmdetection.readthedocs.io/en/latest/get_started.html) for installation instructions.
-
-## Getting Started
-
-Please see [Overview](https://mmdetection.readthedocs.io/en/latest/get_started.html) for the general introduction of MMDetection.
-
-For detailed user guides and advanced guides, please refer to our [documentation](https://mmdetection.readthedocs.io/en/latest/):
-
-- User Guides
-
-  <details>
-
-  - [Train & Test](https://mmdetection.readthedocs.io/en/latest/user_guides/index.html#train-test)
-    - [Learn about Configs](https://mmdetection.readthedocs.io/en/latest/user_guides/config.html)
-    - [Inference with existing models](https://mmdetection.readthedocs.io/en/latest/user_guides/inference.html)
-    - [Dataset Prepare](https://mmdetection.readthedocs.io/en/latest/user_guides/dataset_prepare.html)
-    - [Test existing models on standard datasets](https://mmdetection.readthedocs.io/en/latest/user_guides/test.html)
-    - [Train predefined models on standard datasets](https://mmdetection.readthedocs.io/en/latest/user_guides/train.html)
-    - [Train with customized datasets](https://mmdetection.readthedocs.io/en/latest/user_guides/train.html#train-with-customized-datasets)
-    - [Train with customized models and standard datasets](https://mmdetection.readthedocs.io/en/latest/user_guides/new_model.html)
-    - [Finetuning Models](https://mmdetection.readthedocs.io/en/latest/user_guides/finetune.html)
-    - [Test Results Submission](https://mmdetection.readthedocs.io/en/latest/user_guides/test_results_submission.html)
-    - [Weight initialization](https://mmdetection.readthedocs.io/en/latest/user_guides/init_cfg.html)
-    - [Use a single stage detector as RPN](https://mmdetection.readthedocs.io/en/latest/user_guides/single_stage_as_rpn.html)
-    - [Semi-supervised Object Detection](https://mmdetection.readthedocs.io/en/latest/user_guides/semi_det.html)
-  - [Useful Tools](https://mmdetection.readthedocs.io/en/latest/user_guides/index.html#useful-tools)
-
-  </details>
-
-- Advanced Guides
-
-  <details>
-
-  - [Basic Concepts](https://mmdetection.readthedocs.io/en/latest/advanced_guides/index.html#basic-concepts)
-  - [Component Customization](https://mmdetection.readthedocs.io/en/latest/advanced_guides/index.html#component-customization)
-  - [How to](https://mmdetection.readthedocs.io/en/latest/advanced_guides/index.html#how-to)
-
-  </details>
-
-We also provide object detection colab tutorial [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](demo/MMDet_Tutorial.ipynb) and instance segmentation colab tutorial [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](demo/MMDet_InstanceSeg_Tutorial.ipynb).
-
-To migrate from MMDetection 2.x, please refer to [migration](https://mmdetection.readthedocs.io/en/latest/migration.html).
-
-## Overview of Benchmark and Model Zoo
-
-Results and models are available in the [model zoo](docs/en/model_zoo.md).
-
-<div align="center">
-  <b>Architectures</b>
-</div>
-<table align="center">
-  <tbody>
-    <tr align="center" valign="bottom">
-      <td>
-        <b>Object Detection</b>
-      </td>
-      <td>
-        <b>Instance Segmentation</b>
-      </td>
-      <td>
-        <b>Panoptic Segmentation</b>
-      </td>
-      <td>
-        <b>Other</b>
-      </td>
-    </tr>
-    <tr valign="top">
-      <td>
-        <ul>
-            <li><a href="configs/fast_rcnn">Fast R-CNN (ICCV'2015)</a></li>
-            <li><a href="configs/faster_rcnn">Faster R-CNN (NeurIPS'2015)</a></li>
-            <li><a href="configs/rpn">RPN (NeurIPS'2015)</a></li>
-            <li><a href="configs/ssd">SSD (ECCV'2016)</a></li>
-            <li><a href="configs/retinanet">RetinaNet (ICCV'2017)</a></li>
-            <li><a href="configs/cascade_rcnn">Cascade R-CNN (CVPR'2018)</a></li>
-            <li><a href="configs/yolo">YOLOv3 (ArXiv'2018)</a></li>
-            <li><a href="configs/cornernet">CornerNet (ECCV'2018)</a></li>
-            <li><a href="configs/grid_rcnn">Grid R-CNN (CVPR'2019)</a></li>
-            <li><a href="configs/guided_anchoring">Guided Anchoring (CVPR'2019)</a></li>
-            <li><a href="configs/fsaf">FSAF (CVPR'2019)</a></li>
-            <li><a href="configs/centernet">CenterNet (CVPR'2019)</a></li>
-            <li><a href="configs/libra_rcnn">Libra R-CNN (CVPR'2019)</a></li>
-            <li><a href="configs/tridentnet">TridentNet (ICCV'2019)</a></li>
-            <li><a href="configs/fcos">FCOS (ICCV'2019)</a></li>
-            <li><a href="configs/reppoints">RepPoints (ICCV'2019)</a></li>
-            <li><a href="configs/free_anchor">FreeAnchor (NeurIPS'2019)</a></li>
-            <li><a href="configs/cascade_rpn">CascadeRPN (NeurIPS'2019)</a></li>
-            <li><a href="configs/foveabox">Foveabox (TIP'2020)</a></li>
-            <li><a href="configs/double_heads">Double-Head R-CNN (CVPR'2020)</a></li>
-            <li><a href="configs/atss">ATSS (CVPR'2020)</a></li>
-            <li><a href="configs/nas_fcos">NAS-FCOS (CVPR'2020)</a></li>
-            <li><a href="configs/centripetalnet">CentripetalNet (CVPR'2020)</a></li>
-            <li><a href="configs/autoassign">AutoAssign (ArXiv'2020)</a></li>
-            <li><a href="configs/sabl">Side-Aware Boundary Localization (ECCV'2020)</a></li>
-            <li><a href="configs/dynamic_rcnn">Dynamic R-CNN (ECCV'2020)</a></li>
-            <li><a href="configs/detr">DETR (ECCV'2020)</a></li>
-            <li><a href="configs/paa">PAA (ECCV'2020)</a></li>
-            <li><a href="configs/vfnet">VarifocalNet (CVPR'2021)</a></li>
-            <li><a href="configs/sparse_rcnn">Sparse R-CNN (CVPR'2021)</a></li>
-            <li><a href="configs/yolof">YOLOF (CVPR'2021)</a></li>
-            <li><a href="configs/yolox">YOLOX (CVPR'2021)</a></li>
-            <li><a href="configs/deformable_detr">Deformable DETR (ICLR'2021)</a></li>
-            <li><a href="configs/tood">TOOD (ICCV'2021)</a></li>
-            <li><a href="configs/ddod">DDOD (ACM MM'2021)</a></li>
-            <li><a href="configs/rtmdet">RTMDet (ArXiv'2022)</a></li>
-            <li><a href="configs/conditional_detr">Conditional DETR (ICCV'2021)</a></li>
-            <li><a href="configs/dab_detr">DAB-DETR (ICLR'2022)</a></li>
-            <li><a href="configs/dino">DINO (ICLR'2023)</a></li>
-            <li><a href="configs/glip">GLIP (CVPR'2022)</a></li>
-            <li><a href="configs/ddq">DDQ (CVPR'2023)</a></li>
-            <li><a href="projects/DiffusionDet">DiffusionDet (ArXiv'2023)</a></li>
-            <li><a href="projects/EfficientDet">EfficientDet (CVPR'2020)</a></li>
-            <li><a href="projects/ViTDet">ViTDet (ECCV'2022)</a></li>
-            <li><a href="projects/Detic">Detic (ECCV'2022)</a></li>
-            <li><a href="projects/CO-DETR">CO-DETR (ICCV'2023)</a></li>
-      </ul>
-      </td>
-      <td>
-        <ul>
-          <li><a href="configs/mask_rcnn">Mask R-CNN (ICCV'2017)</a></li>
-          <li><a href="configs/cascade_rcnn">Cascade Mask R-CNN (CVPR'2018)</a></li>
-          <li><a href="configs/ms_rcnn">Mask Scoring R-CNN (CVPR'2019)</a></li>
-          <li><a href="configs/htc">Hybrid Task Cascade (CVPR'2019)</a></li>
-          <li><a href="configs/yolact">YOLACT (ICCV'2019)</a></li>
-          <li><a href="configs/instaboost">InstaBoost (ICCV'2019)</a></li>
-          <li><a href="configs/solo">SOLO (ECCV'2020)</a></li>
-          <li><a href="configs/point_rend">PointRend (CVPR'2020)</a></li>
-          <li><a href="configs/detectors">DetectoRS (ArXiv'2020)</a></li>
-          <li><a href="configs/solov2">SOLOv2 (NeurIPS'2020)</a></li>
-          <li><a href="configs/scnet">SCNet (AAAI'2021)</a></li>
-          <li><a href="configs/queryinst">QueryInst (ICCV'2021)</a></li>
-          <li><a href="configs/mask2former">Mask2Former (ArXiv'2021)</a></li>
-          <li><a href="configs/condinst">CondInst (ECCV'2020)</a></li>
-          <li><a href="projects/SparseInst">SparseInst (CVPR'2022)</a></li>
-          <li><a href="configs/rtmdet">RTMDet (ArXiv'2022)</a></li>
-          <li><a href="configs/boxinst">BoxInst (CVPR'2021)</a></li>
-          <li><a href="projects/ConvNeXt-V2">ConvNeXt-V2 (Arxiv'2023)</a></li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li><a href="configs/panoptic_fpn">Panoptic FPN (CVPR'2019)</a></li>
-          <li><a href="configs/maskformer">MaskFormer (NeurIPS'2021)</a></li>
-          <li><a href="configs/mask2former">Mask2Former (ArXiv'2021)</a></li>
-          <li><a href="configs/XDecoder">XDecoder (CVPR'2023)</a></li>
-        </ul>
-      </td>
-      <td>
-        </ul>
-          <li><b>Contrastive Learning</b></li>
-        <ul>
-        <ul>
-          <li><a href="configs/selfsup_pretrain">SwAV (NeurIPS'2020)</a></li>
-          <li><a href="configs/selfsup_pretrain">MoCo (CVPR'2020)</a></li>
-          <li><a href="configs/selfsup_pretrain">MoCov2 (ArXiv'2020)</a></li>
-        </ul>
-        </ul>
-        </ul>
-          <li><b>Distillation</b></li>
-        <ul>
-        <ul>
-          <li><a href="configs/ld">Localization Distillation (CVPR'2022)</a></li>
-          <li><a href="configs/lad">Label Assignment Distillation (WACV'2022)</a></li>
-        </ul>
-        </ul>
-          <li><b>Semi-Supervised Object Detection</b></li>
-        <ul>
-        <ul>
-          <li><a href="configs/soft_teacher">Soft Teacher (ICCV'2021)</a></li>
-        </ul>
-        </ul>
-      </ul>
-      </td>
-    </tr>
-</td>
-    </tr>
-  </tbody>
-</table>
-
-<div align="center">
-  <b>Components</b>
-</div>
-<table align="center">
-  <tbody>
-    <tr align="center" valign="bottom">
-      <td>
-        <b>Backbones</b>
-      </td>
-      <td>
-        <b>Necks</b>
-      </td>
-      <td>
-        <b>Loss</b>
-      </td>
-      <td>
-        <b>Common</b>
-      </td>
-    </tr>
-    <tr valign="top">
-      <td>
-      <ul>
-        <li>VGG (ICLR'2015)</li>
-        <li>ResNet (CVPR'2016)</li>
-        <li>ResNeXt (CVPR'2017)</li>
-        <li>MobileNetV2 (CVPR'2018)</li>
-        <li><a href="configs/hrnet">HRNet (CVPR'2019)</a></li>
-        <li><a href="configs/empirical_attention">Generalized Attention (ICCV'2019)</a></li>
-        <li><a href="configs/gcnet">GCNet (ICCVW'2019)</a></li>
-        <li><a href="configs/res2net">Res2Net (TPAMI'2020)</a></li>
-        <li><a href="configs/regnet">RegNet (CVPR'2020)</a></li>
-        <li><a href="configs/resnest">ResNeSt (ArXiv'2020)</a></li>
-        <li><a href="configs/pvt">PVT (ICCV'2021)</a></li>
-        <li><a href="configs/swin">Swin (CVPR'2021)</a></li>
-        <li><a href="configs/pvt">PVTv2 (ArXiv'2021)</a></li>
-        <li><a href="configs/resnet_strikes_back">ResNet strikes back (ArXiv'2021)</a></li>
-        <li><a href="configs/efficientnet">EfficientNet (ArXiv'2021)</a></li>
-        <li><a href="configs/convnext">ConvNeXt (CVPR'2022)</a></li>
-        <li><a href="projects/ConvNeXt-V2">ConvNeXtv2 (ArXiv'2023)</a></li>
-      </ul>
-      </td>
-      <td>
-      <ul>
-        <li><a href="configs/pafpn">PAFPN (CVPR'2018)</a></li>
-        <li><a href="configs/nas_fpn">NAS-FPN (CVPR'2019)</a></li>
-        <li><a href="configs/carafe">CARAFE (ICCV'2019)</a></li>
-        <li><a href="configs/fpg">FPG (ArXiv'2020)</a></li>
-        <li><a href="configs/groie">GRoIE (ICPR'2020)</a></li>
-        <li><a href="configs/dyhead">DyHead (CVPR'2021)</a></li>
-      </ul>
-      </td>
-      <td>
-        <ul>
-          <li><a href="configs/ghm">GHM (AAAI'2019)</a></li>
-          <li><a href="configs/gfl">Generalized Focal Loss (NeurIPS'2020)</a></li>
-          <li><a href="configs/seesaw_loss">Seasaw Loss (CVPR'2021)</a></li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li><a href="configs/faster_rcnn/faster-rcnn_r50_fpn_ohem_1x_coco.py">OHEM (CVPR'2016)</a></li>
-          <li><a href="configs/gn">Group Normalization (ECCV'2018)</a></li>
-          <li><a href="configs/dcn">DCN (ICCV'2017)</a></li>
-          <li><a href="configs/dcnv2">DCNv2 (CVPR'2019)</a></li>
-          <li><a href="configs/gn+ws">Weight Standardization (ArXiv'2019)</a></li>
-          <li><a href="configs/pisa">Prime Sample Attention (CVPR'2020)</a></li>
-          <li><a href="configs/strong_baselines">Strong Baselines (CVPR'2021)</a></li>
-          <li><a href="configs/resnet_strikes_back">Resnet strikes back (ArXiv'2021)</a></li>
-        </ul>
-      </td>
-    </tr>
-</td>
-    </tr>
-  </tbody>
-</table>
-
-Some other methods are also supported in [projects using MMDetection](./docs/en/notes/projects.md).
-
-## FAQ
-
-Please refer to [FAQ](docs/en/notes/faq.md) for frequently asked questions.
-
-## Contributing
-
-We appreciate all contributions to improve MMDetection. Ongoing projects can be found in out [GitHub Projects](https://github.com/open-mmlab/mmdetection/projects). Welcome community users to participate in these projects. Please refer to [CONTRIBUTING.md](.github/CONTRIBUTING.md) for the contributing guideline.
-
-## Acknowledgement
-
-MMDetection is an open source project that is contributed by researchers and engineers from various colleges and companies. We appreciate all the contributors who implement their methods or add new features, as well as users who give valuable feedbacks.
-We wish that the toolbox and benchmark could serve the growing research community by providing a flexible toolkit to reimplement existing methods and develop their own new detectors.
-
-## Citation
-
-If you use this toolbox or benchmark in your research, please cite this project.
-
-```
-@article{mmdetection,
-  title   = {{MMDetection}: Open MMLab Detection Toolbox and Benchmark},
-  author  = {Chen, Kai and Wang, Jiaqi and Pang, Jiangmiao and Cao, Yuhang and
-             Xiong, Yu and Li, Xiaoxiao and Sun, Shuyang and Feng, Wansen and
-             Liu, Ziwei and Xu, Jiarui and Zhang, Zheng and Cheng, Dazhi and
-             Zhu, Chenchen and Cheng, Tianheng and Zhao, Qijie and Li, Buyu and
-             Lu, Xin and Zhu, Rui and Wu, Yue and Dai, Jifeng and Wang, Jingdong
-             and Shi, Jianping and Ouyang, Wanli and Loy, Chen Change and Lin, Dahua},
-  journal= {arXiv preprint arXiv:1906.07155},
-  year={2019}
-}
+```bash
+pip install future tensorboard
+pip install wandb
 ```
 
-## License
+1. max_epochs = 2, lr=0.0001, in /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/configs/_base_/datasets/mobile_detection.py::train_dataloader & val_dataloader batch_size = 6 
 
-This project is released under the [Apache 2.0 license](LICENSE).
+GPU : 42G on A100
 
-## Projects in OpenMMLab
+Command:
 
-- [MMEngine](https://github.com/open-mmlab/mmengine): OpenMMLab foundational library for training deep learning models.
-- [MMCV](https://github.com/open-mmlab/mmcv): OpenMMLab foundational library for computer vision.
-- [MMPreTrain](https://github.com/open-mmlab/mmpretrain): OpenMMLab pre-training toolbox and benchmark.
-- [MMagic](https://github.com/open-mmlab/mmagic): Open**MM**Lab **A**dvanced, **G**enerative and **I**ntelligent **C**reation toolbox.
-- [MMDetection](https://github.com/open-mmlab/mmdetection): OpenMMLab detection toolbox and benchmark.
-- [MMDetection3D](https://github.com/open-mmlab/mmdetection3d): OpenMMLab's next-generation platform for general 3D object detection.
-- [MMRotate](https://github.com/open-mmlab/mmrotate): OpenMMLab rotated object detection toolbox and benchmark.
-- [MMYOLO](https://github.com/open-mmlab/mmyolo): OpenMMLab YOLO series toolbox and benchmark.
-- [MMSegmentation](https://github.com/open-mmlab/mmsegmentation): OpenMMLab semantic segmentation toolbox and benchmark.
-- [MMOCR](https://github.com/open-mmlab/mmocr): OpenMMLab text detection, recognition, and understanding toolbox.
-- [MMPose](https://github.com/open-mmlab/mmpose): OpenMMLab pose estimation toolbox and benchmark.
-- [MMHuman3D](https://github.com/open-mmlab/mmhuman3d): OpenMMLab 3D human parametric model toolbox and benchmark.
-- [MMSelfSup](https://github.com/open-mmlab/mmselfsup): OpenMMLab self-supervised learning toolbox and benchmark.
-- [MMRazor](https://github.com/open-mmlab/mmrazor): OpenMMLab model compression toolbox and benchmark.
-- [MMFewShot](https://github.com/open-mmlab/mmfewshot): OpenMMLab fewshot learning toolbox and benchmark.
-- [MMAction2](https://github.com/open-mmlab/mmaction2): OpenMMLab's next-generation action understanding toolbox and benchmark.
-- [MMTracking](https://github.com/open-mmlab/mmtracking): OpenMMLab video perception toolbox and benchmark.
-- [MMFlow](https://github.com/open-mmlab/mmflow): OpenMMLab optical flow toolbox and benchmark.
-- [MMEditing](https://github.com/open-mmlab/mmediting): OpenMMLab image and video editing toolbox.
-- [MMGeneration](https://github.com/open-mmlab/mmgeneration): OpenMMLab image and video generative models toolbox.
-- [MMDeploy](https://github.com/open-mmlab/mmdeploy): OpenMMLab model deployment framework.
-- [MIM](https://github.com/open-mmlab/mim): MIM installs OpenMMLab packages.
-- [MMEval](https://github.com/open-mmlab/mmeval): A unified evaluation library for multiple machine learning libraries.
-- [Playground](https://github.com/open-mmlab/playground): A central hub for gathering and showcasing amazing projects built upon OpenMMLab.
+```bash
+export CUDA_VISIBLE_DEVICES=1
+python tools/train.py configs/dino/dino-4scale_r50_8xb2-12e_mobile.py /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/data/train2017
+/home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/data/val2017
+```
+
+Result: 
+
+```bash
+05/20 23:48:53 - mmengine - INFO - Epoch(val) [2][37/37]    coco/bbox_mAP: 0.1760  coco/bbox_mAP_50: 0.2950  coco/bbox_mAP_75: 0.1830  coco/bbox_mAP_s: 0.0000  coco/bbox_mAP_m: 0.1910  coco/bbox_mAP_l: 0.1910  data_time: 0.0209  time: 0.2734
+
+wandb: Run summary:
+wandb:          base_lr 0.0001
+wandb:    coco/bbox_mAP 0.176
+wandb: coco/bbox_mAP_50 0.295
+wandb: coco/bbox_mAP_75 0.183
+wandb:  coco/bbox_mAP_l 0.191
+wandb:  coco/bbox_mAP_m 0.191
+wandb:  coco/bbox_mAP_s 0.0
+wandb:  d0.dn_loss_bbox 1.07381
+wandb:   d0.dn_loss_cls 0.06779
+wandb:   d0.dn_loss_iou 0.65904
+wandb:     d0.loss_bbox 0.23007
+wandb:      d0.loss_cls 0.2753
+wandb:      d0.loss_iou 0.2276
+wandb:  d1.dn_loss_bbox 1.02076
+wandb:   d1.dn_loss_cls 0.05875
+wandb:   d1.dn_loss_iou 0.60692
+wandb:     d1.loss_bbox 0.22023
+wandb:      d1.loss_cls 0.25504
+wandb:      d1.loss_iou 0.21373
+wandb:  d2.dn_loss_bbox 1.01217
+wandb:   d2.dn_loss_cls 0.05644
+wandb:   d2.dn_loss_iou 0.59336
+wandb:     d2.loss_bbox 0.2115
+wandb:      d2.loss_cls 0.24779
+wandb:      d2.loss_iou 0.20584
+wandb:  d3.dn_loss_bbox 1.00777
+wandb:   d3.dn_loss_cls 0.05557
+wandb:   d3.dn_loss_iou 0.58736
+wandb:     d3.loss_bbox 0.21026
+wandb:      d3.loss_cls 0.2383
+wandb:      d3.loss_iou 0.20438
+wandb:  d4.dn_loss_bbox 1.00768
+wandb:   d4.dn_loss_cls 0.05479
+wandb:   d4.dn_loss_iou 0.585
+wandb:     d4.loss_bbox 0.20878
+wandb:      d4.loss_cls 0.2369
+wandb:      d4.loss_iou 0.20262
+wandb:        data_time 0.02092
+wandb:     dn_loss_bbox 1.00779
+wandb:      dn_loss_cls 0.0549
+wandb:      dn_loss_iou 0.58495
+wandb:    enc_loss_bbox 0.27616
+wandb:     enc_loss_cls 0.28493
+wandb:     enc_loss_iou 0.28675
+wandb:            epoch 2
+wandb:        grad_norm 23.16829
+wandb:             iter 627
+wandb:             loss 14.97905
+wandb:        loss_bbox 0.20919
+wandb:         loss_cls 0.23637
+wandb:         loss_iou 0.20246
+wandb:               lr 0.0001
+wandb:           memory 30647
+wandb:             time 0.27344
+```
+
+
+2. max_epochs = 2, lr = 0.001, val_batch_size, train_batch_size = 2
+
+GPU : 75G on A100
+
+Command:
+
+```bash
+export CUDA_VISIBLE_DEVICES=1
+python tools/train.py configs/dino/dino-4scale_r50_8xb2-12e_mobile.py --train_batch_size 12 --val_batch_size 12 --lr 0.001 --epoch 2
+```
+
+Result: 
+
+```bash
+wandb: Run summary:
+wandb:          base_lr 0.001
+wandb:    coco/bbox_mAP 0.124
+wandb: coco/bbox_mAP_50 0.251
+wandb: coco/bbox_mAP_75 0.119
+wandb:  coco/bbox_mAP_l 0.139
+wandb:  coco/bbox_mAP_m 0.11
+wandb:  coco/bbox_mAP_s 0.0
+wandb:  d0.dn_loss_bbox 1.20174
+wandb:   d0.dn_loss_cls 0.07639
+wandb:   d0.dn_loss_iou 0.7493
+wandb:     d0.loss_bbox 0.28932
+wandb:      d0.loss_cls 0.31339
+wandb:      d0.loss_iou 0.28693
+wandb:  d1.dn_loss_bbox 1.15717
+wandb:   d1.dn_loss_cls 0.07267
+wandb:   d1.dn_loss_iou 0.69532
+wandb:     d1.loss_bbox 0.27118
+wandb:      d1.loss_cls 0.30637
+wandb:      d1.loss_iou 0.2647
+wandb:  d2.dn_loss_bbox 1.1489
+wandb:   d2.dn_loss_cls 0.07023
+wandb:   d2.dn_loss_iou 0.67804
+wandb:     d2.loss_bbox 0.26803
+wandb:      d2.loss_cls 0.29499
+wandb:      d2.loss_iou 0.25781
+wandb:  d3.dn_loss_bbox 1.14537
+wandb:   d3.dn_loss_cls 0.0696
+wandb:   d3.dn_loss_iou 0.67024
+wandb:     d3.loss_bbox 0.2658
+wandb:      d3.loss_cls 0.28702                                                                                                                                                                                                                                                                                                                                                                                                                                      "ucsc-research-new" 00:38 21-May-24
+wandb:      d3.loss_iou 0.25485
+wandb:  d4.dn_loss_bbox 1.14499
+wandb:   d4.dn_loss_cls 0.06978
+wandb:   d4.dn_loss_iou 0.66854
+wandb:     d4.loss_bbox 0.26572
+wandb:      d4.loss_cls 0.28618
+wandb:      d4.loss_iou 0.25461
+wandb:        data_time 0.04619
+wandb:     dn_loss_bbox 1.14504
+wandb:      dn_loss_cls 0.06964
+wandb:      dn_loss_iou 0.66863
+wandb:    enc_loss_bbox 0.37075
+wandb:     enc_loss_cls 0.31783
+wandb:     enc_loss_iou 0.37811
+wandb:            epoch 2
+wandb:        grad_norm 16.54684
+wandb:             iter 314
+wandb:             loss 17.54069
+wandb:        loss_bbox 0.26599
+wandb:         loss_cls 0.2848
+wandb:         loss_iou 0.25472
+wandb:               lr 0.001
+wandb:           memory 61235
+wandb:             time 0.46916
+```
+
+3. max_epochs = 20, lr = 0.001, val_batch_size, train_batch_size = 12, by dino-4scale_r50_8xb2 12e checkpoints
+
+GPU : 75G on A100
+
+Command:
+
+```bash
+export CUDA_VISIBLE_DEVICES=1
+python tools/train.py configs/dino/dino-4scale_r50_8xb2-12e_mobile.py --train_batch_size 12 --val_batch_size 12 --lr 0.001 --epoch 20
+```
+
+visualize result, refer to [VISUALIZATION](https://mmdetection.readthedocs.io/en/latest/user_guides/visualization.html)
+
+```bash
+python tools/test.py configs/dino/dino-4scale_r50_8xb2-12e_mobile.py /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-12e_mobile/epoch_20.pth --show-dir dino-4scale_r50_8xb2-12e_mobile_imgs/
+```
+
+After correction of data:
+
+Result: 
+
+```bash
+938  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.739
+939  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=1000 ] = 0.870
+940  Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=1000 ] = 0.817
+941  Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.000
+942  Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.689
+943  Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.755
+944  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.834
+945  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=300 ] = 0.869
+946  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=1000 ] = 0.869
+947  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.000
+948  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.787
+949  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.877
+950 05/21 07:24:19 - mmengine - INFO - bbox_mAP_copypaste: 0.739 0.870 0.817 0.000 0.689 0.755
+951 05/21 07:24:19 - mmengine - INFO - Epoch(val) [20][19/19]    coco/bbox_mAP: 0.7390  coco/bbox_mAP_50: 0.8700  coco/bbox_mAP_75: 0.8170  coco/bbox_mAP_s: 0.0000  coco/bbox_mAP_m: 0.6890  coco/bbox_mAP_l: 0.7550  data_time: 0.0565  time: 0.4842
+```
+
+```bash
+python tools/test.py configs/dino/dino-4scale_r50_8xb2-12e_mobile.py /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-12e_mobile/epoch_20.pth --show-dir dino-4scale_r50_8xb2-12e_mobile_imgs/
+```
+
+result in /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-12e_mobile/20240521_153517/dino-4scale_r50_8xb2-12e_mobile_imgs
+
+4, max_epochs = 20, lr = 0.001, val_batch_size = 3, train_batch_size = 2, loaded from https://github.com/RistoranteRist/mmlab-weights/releases/download/dino-swinl/dino-5scale_swin-l_8xb2-36e_coco-5486e051.pth
+
+GPU : 75G on A100
+
+Command:
+
+```bash
+export CUDA_VISIBLE_DEVICES=1
+python tools/train.py configs/dino/dino-5scale_swin-l_8xb2-36e_mobile.py --train_batch_size 3 --val_batch_size 2 --lr 0.001 --epoch 20 # --train_batch_size 4 out of memory
+```
+
+visualize result, refer to [VISUALIZATION](https://mmdetection.readthedocs.io/en/latest/user_guides/visualization.html)
+
+```bash
+python tools/test.py configs/dino/dino-5scale_swin-l_8xb2-36e_mobile.py /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-12e_mobile/epoch_20.pth --show-dir dino-4scale_r50_8xb2-12e_mobile_imgs/
+```
+
+Result:
+
+```bash
+wandb: Run summary:
+wandb:          base_lr 0.001
+wandb:    coco/bbox_mAP 0.004
+wandb: coco/bbox_mAP_50 0.031
+wandb: coco/bbox_mAP_75 0.001
+wandb:  coco/bbox_mAP_l 0.009
+wandb:  coco/bbox_mAP_m 0.0
+wandb:  coco/bbox_mAP_s 0.0
+wandb:  d0.dn_loss_bbox 1.08605
+wandb:   d0.dn_loss_cls 0.14335
+wandb:   d0.dn_loss_iou 1.15801
+wandb:     d0.loss_bbox 1.01825
+wandb:      d0.loss_cls 0.40777
+wandb:      d0.loss_iou 1.37544
+wandb:  d1.dn_loss_bbox 1.0866
+wandb:   d1.dn_loss_cls 0.1724
+wandb:   d1.dn_loss_iou 1.15929
+wandb:     d1.loss_bbox 0.84916
+wandb:      d1.loss_cls 0.42898
+wandb:      d1.loss_iou 1.2731
+wandb:  d2.dn_loss_bbox 1.05772
+wandb:   d2.dn_loss_cls 0.25497
+wandb:   d2.dn_loss_iou 1.14394
+wandb:     d2.loss_bbox 0.77269
+wandb:      d2.loss_cls 0.43709
+wandb:      d2.loss_iou 1.20997
+wandb:  d3.dn_loss_bbox 1.05863
+wandb:   d3.dn_loss_cls 0.26209
+wandb:   d3.dn_loss_iou 1.14434
+wandb:     d3.loss_bbox 0.77459
+wandb:      d3.loss_cls 0.43016
+wandb:      d3.loss_iou 1.20601
+wandb:  d4.dn_loss_bbox 1.05884
+wandb:   d4.dn_loss_cls 0.27255
+wandb:   d4.dn_loss_iou 1.1471
+wandb:     d4.loss_bbox 0.76086
+wandb:      d4.loss_cls 0.44398
+wandb:      d4.loss_iou 1.20075
+wandb:        data_time 0.00988
+wandb:     dn_loss_bbox 1.06063
+wandb:      dn_loss_cls 0.25748
+wandb:      dn_loss_iou 1.14914
+wandb:    enc_loss_bbox 11.3105
+wandb:     enc_loss_cls 0.42329
+wandb:     enc_loss_iou 2.55191
+wandb:            epoch 3
+wandb:        grad_norm 83.80324
+wandb:             iter 1282
+wandb:             loss 43.94187
+wandb:        loss_bbox 0.76494
+wandb:         loss_cls 0.43017
+wandb:         loss_iou 1.19912
+wandb:               lr 0.001
+wandb:           memory 65078
+wandb:             time 3.61632
+```
+
+5, max_epochs = 20, lr = 0.001, val_batch_size = 3, train_batch_size = 2, loaded from https://github.com/RistoranteRist/mmlab-weights/releases/download/dino-swinl/dino-5scale_swin-l_8xb2-36e_coco-5486e051.pth
+
+GPU : 75G on A100
+
+Command:
+
+```bash
+export CUDA_VISIBLE_DEVICES=1
+python tools/train.py configs/dino/dino-5scale_swin-l_8xb2-12e_mobile.py --train_batch_size 3 --val_batch_size 2 --lr 0.001 --epoch 20 # --train_batch_size 4 out of memory
+```
+
+visualize result, refer to [VISUALIZATION](https://mmdetection.readthedocs.io/en/latest/user_guides/visualization.html)
+
+```bash
+python tools/test.py configs/dino/dino-5scale_swin-l_8xb2-12e_mobile /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-12e_mobile/epoch_20.pth --show-dir dino-5scale_swin-l_8xb2-12e_mobile_imgs/
+```
+
+Result:
+
+```bash
+1983  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.061
+1984  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=1000 ] = 0.121
+1985  Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=1000 ] = 0.058
+1986  Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.000
+1987  Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.024
+1988  Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.071
+1989  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.164
+1990  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=300 ] = 0.252
+1991  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=1000 ] = 0.252
+1992  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.000
+1993  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.041
+1994  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.273
+1995 05/22 03:31:51 - mmengine - INFO - bbox_mAP_copypaste: 0.061 0.121 0.058 0.000 0.024 0.071
+1996 05/22 03:31:51 - mmengine - INFO - Epoch(val) [20][109/109]    coco/bbox_mAP: 0.0610  coco/bbox_mAP_50: 0.1210  coco/bbox_mAP_75: 0.0580  coco/bbox_mAP_s: 0.0000  coco/bbox_mAP_m: 0.0240  coco/bbox_mAP_l: 0.0710  data_time: 0.0052  time: 0.4794
+```
+
+6, max_epochs = 36, lr = 0.001, val_batch_size = 10, train_batch_size = 2, loaded from https://download.openmmlab.com/mmdetection/v3.0/dino/dino-4scale_r50_improved_8xb2-12e_coco/dino-4scale_r50_improved_8xb2-12e_coco_20230818_162607-6f47a913.pt
+
+Status: **current best-performed model**
+
+GPU : 75G on A100
+
+Command:
+
+```bash
+export CUDA_VISIBLE_DEVICES=1
+python tools/train.py configs/dino/dino-4scale_r50_8xb2-36e_mobile.py --train_batch_size 10 --val_batch_size 10 --lr 0.001 --epoch 36 # 12 out of memory during 16
+```
+
+Result:
+
+```bash
+1406  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.856
+1407  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=1000 ] = 0.920
+1408  Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=1000 ] = 0.886
+1409  Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.000
+1410  Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.846
+1411  Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.864
+1412  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.898
+1413  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=300 ] = 0.915
+1414  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=1000 ] = 0.915
+1415  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.000
+1416  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.892
+1417  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.917
+1418 05/22 09:32:29 - mmengine - INFO - bbox_mAP_copypaste: 0.856 0.920 0.886 0.000 0.846 0.864
+1419 05/22 09:32:29 - mmengine - INFO - Epoch(val) [36][22/22]    coco/bbox_mAP: 0.8560  coco/bbox_mAP_50: 0.9200  coco/bbox_mAP_75: 0.8860  coco/bbox_mAP_s: 0.0000  coco/bbox_mAP_m: 0.8460  coco/bbox_mAP_l: 0.8640  data_time: 0.0343  time: 0.4361
+```
+
+visualize result
+
+```bash
+python tools/test.py configs/dino/dino-4scale_r50_8xb2-36e_mobile.py /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-36e_mobile/epoch_36.pth --show-dir dino-4scale_r50_8xb2-36e_mobile_imgs/
+```
+
+val result:
+
+```bash
+DONE (t=27.55s).
+Accumulating evaluation results...
+DONE (t=1.26s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.857
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=1000 ] = 0.920
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=1000 ] = 0.886
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.846
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.864
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.898
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=300 ] = 0.915
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=1000 ] = 0.915
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.892
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.917
+05/22 15:44:09 - mmengine - INFO - bbox_mAP_copypaste: 0.857 0.920 0.886 0.000 0.846 0.864
+05/22 15:44:09 - mmengine - INFO - Epoch(test) [37/37]    coco/bbox_mAP: 0.8570  coco/bbox_mAP_50: 0.9200  coco/bbox_mAP_75: 0.8860  coco/bbox_mAP_s: 0.0000  coco/bbox_mAP_m: 0.8460  coco/bbox_mAP_l: 0.8640  data_time: 4.0555  time: 4.3898
+```
+
+7, large_bbox, max_epochs = 36, lr = 0.001, val_batch_size = 10, train_batch_size = 2, loaded from https://download.openmmlab.com/mmdetection/v3.0/dino/dino-4scale_r50_improved_8xb2-12e_coco/dino-4scale_r50_improved_8xb2-12e_coco_20230818_162607-6f47a913.pt
+
+GPU : 75G on A100
+
+Command:
+
+```bash
+export CUDA_VISIBLE_DEVICES=0
+python tools/train.py configs/dino/dino-4scale_r50_8xb2-36e_mobile_large_bbox.py --train_batch_size 10 --val_batch_size 10 --lr 0.001 --epoch 36 # 12 out of memory during 16
+```
+
+Result:
+
+```bash
+export CUDA_VISIBLE_DEVICES=0
+python tools/test.py configs/dino/dino-4scale_r50_8xb2-36e_mobile_large_bbox.py /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-36e_mobile_large_bbox/epoch_36.pth --show-dir dino-4scale_r50_8xb2-36e_mobile_large_bbox_imgs/
+```
+
+Visualization:
+
+```bash
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.413
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=1000 ] = 0.491
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=1000 ] = 0.419
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.414
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.777
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=300 ] = 0.806
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=1000 ] = 0.806                                                                                                                                                                                                                                        ucsc-research-new" 18:48 28-May-24
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.806
+05/28 18:49:51 - mmengine - INFO - bbox_mAP_copypaste: 0.413 0.491 0.419 -1.000 -1.000 0.414
+05/28 18:49:51 - mmengine - INFO - Epoch(test) [37/37]    coco/bbox_mAP: 0.4130  coco/bbox_mAP_50: 0.4910  coco/bbox_mAP_75: 0.4190  coco/bbox_mAP_s: -1.0000  coco/bbox_mAP_m: -1.0000  coco/bbox_mAP_l: 0.4140  data_time: 3.5285  time: 3.8595
+```
+
+8, small_bbox, max_epochs = 36, lr = 0.001, val_batch_size = 10, train_batch_size = 2, loaded from https://download.openmmlab.com/mmdetection/v3.0/dino/dino-4scale_r50_improved_8xb2-12e_coco/dino-4scale_r50_improved_8xb2-12e_coco_20230818_162607-6f47a913.pt
+
+GPU : 75G on A100
+
+Command:
+
+```bash
+export CUDA_VISIBLE_DEVICES=1
+python tools/train.py configs/dino/dino-4scale_r50_8xb2-36e_mobile_small_bbox.py --train_batch_size 10 --val_batch_size 10 --lr 0.001 --epoch 36 # 12 out of memory during 16
+```
+
+Result:
+
+```bash
+export CUDA_VISIBLE_DEVICES=1
+python tools/test.py configs/dino/dino-4scale_r50_8xb2-36e_mobile_small_bbox.py /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-36e_mobile_small_bbox/epoch_36.pth --show-dir dino-4scale_r50_8xb2-36e_mobile_small_bbox_imgs/
+```
+
+Visualization:
+
+```bash
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.720
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=1000 ] = 0.853
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=1000 ] = 0.779
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.751
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.712
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.725
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.825
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=300 ] = 0.835
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=1000 ] = 0.835
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.871
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.783
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.844
+05/28 18:51:54 - mmengine - INFO - bbox_mAP_copypaste: 0.720 0.853 0.779 0.751 0.712 0.725
+05/28 18:51:54 - mmengine - INFO - Epoch(test) [37/37]    coco/bbox_mAP: 0.7200  coco/bbox_mAP_50: 0.8530  coco/bbox_mAP_75: 0.7790  coco/bbox_mAP_s: 0.7510  coco/bbox_mAP_m: 0.7120  coco/bbox_mAP_l: 0.7250  data_time: 3.8087  time: 4.1471        
+```
+
+9. multi_bbox, max_epochs = 36, lr = 0.001, val_batch_size = 10, train_batch_size = 2, loaded from https://download.openmmlab.com/mmdetection/v3.0/dino/dino-4scale_r50_improved_8xb2-12e_coco/dino-4scale_r50_improved_8xb2-12e_coco_20230818_162607-6f47a913.pt
+
+Preparation:
+
+1, generate new annotations + classes in multiclass label + configuration file
+2, change model's head class
+
+GPU : 2*75G on A100 (Best result until now)
+
+* Case 1: 36e_mobile_multi_bbox
+
+Command:
+
+```bash
+python tools/train.py configs/dino/dino-4scale_r50_8xb2-36e_mobile_multi_bbox.py --train_batch_size 10 --val_batch_size 10 --lr 0.001 --epoch 36 # 12 out of memory during 16
+# distributed training
+export CUDA_VISIBLE_DEVICES=0,1
+./tools/dist_train_custom.sh configs/dino/dino-4scale_r50_8xb2-36e_mobile_multi_bbox.py 2
+```
+
+Result:
+
+```bash
+```
+
+```bash
+python tools/test.py configs/dino/dino-4scale_r50_8xb2-36e_mobile_multi_bbox.py /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-36e_mobile_multi_bbox/epoch_36.pth --show-dir dino-4scale_r50_8xb2-36e_mobile_multi_bbox_imgs/
+```
+
+Visualization & Val result:
+
+```bash
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.920
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=1000 ] = 0.953
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=1000 ] = 0.929
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.900
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.866
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.921
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.944
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=300 ] = 0.946
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=1000 ] = 0.946
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.900
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.893
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.948
+05/29 07:52:42 - mmengine - INFO - bbox_mAP_copypaste: 0.920 0.953 0.929 0.900 0.866 0.921
+05/29 07:52:42 - mmengine - INFO - Epoch(test) [37/37]    coco/bbox_mAP: 0.9200  coco/bbox_mAP_50: 0.9530  coco/bbox_mAP_75: 0.9290  coco/bbox_mAP_s: 0.9000  coco/bbox_mAP_m: 0.8660  coco/bbox_mAP_l: 0.9210  data_time: 3.7632  time: 4.0880
+```
+
+* Case 2: 36e_mobile_multi_bbox with epoch 50:
+
+Command:
+
+```bash
+# distributed training
+export CUDA_VISIBLE_DEVICES=0,1
+./tools/dist_train_custom_multi_bbox.sh configs/dino/dino-4scale_r50_8xb2-50e_mobile_multi_bbox.py 2
+```
+
+```bash
+python tools/test.py configs/dino/dino-4scale_r50_8xb2-50e_mobile_multi_bbox.py /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-50e_mobile_multi_bbox/epoch_50.pth --show-dir dino-4scale_r50_8xb2-50e_mobile_multi_bbox_imgs/
+```
+
+Visualization & Val result:
+
+```bash 
+# epoch 36 checkpoint
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.923
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=1000 ] = 0.953
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=1000 ] = 0.933
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.715
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.874
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.924
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.946
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=300 ] = 0.949
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=1000 ] = 0.949
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.714
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.896
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.951
+05/29 11:09:02 - mmengine - INFO - bbox_mAP_copypaste: 0.923 0.953 0.933 0.715 0.874 0.924
+05/29 11:09:02 - mmengine - INFO - Epoch(test) [37/37]    coco/bbox_mAP: 0.9230  coco/bbox_mAP_50: 0.9530  coco/bbox_mAP_75: 0.9330  coco/bbox_mAP_s: 0.7150  coco/bbox_mAP_m: 0.8740  coco/bbox_mAP_l: 0.9240  data_time: 3.9394  time: 4.5280
+# epoch 50 checkpoint
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.935
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=1000 ] = 0.960
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=1000 ] = 0.941
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.985
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.889
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.935
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.953
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=300 ] = 0.955
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=1000 ] = 0.955
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.986
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.907
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.957
+05/29 11:29:21 - mmengine - INFO - bbox_mAP_copypaste: 0.935 0.960 0.941 0.985 0.889 0.935
+05/29 11:29:21 - mmengine - INFO - Epoch(test) [37/37]    coco/bbox_mAP: 0.9350  coco/bbox_mAP_50: 0.9600  coco/bbox_mAP_75: 0.9410  coco/bbox_mAP_s: 0.9850  coco/bbox_mAP_m: 0.8890  coco/bbox_mAP_l: 0.9350  data_time: 3.8533  time: 4.1884
+```
+
+* Case 3: 90e_mobile_multi_bbox with epoch 90:
+
+Command:
+
+```bash
+# distributed training
+export CUDA_VISIBLE_DEVICES=0,1,2,3
+./tools/dist_train_custom_multi_bbox.sh configs/dino/dino-4scale_r50_8xb2-90e_mobile_multi_bbox.py 4
+```
+
+```bash
+python tools/test.py configs/dino/dino-4scale_r50_8xb2-90e_mobile_multi_bbox.py /data/orlando/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-90e_mobile_multi_bbox/epoch_90.pth --show-dir dino-4scale_r50_8xb2-90e_mobile_multi_bbox_imgs/
+```
+
+Visualization & Val result:
+
+```bash
+```
+
+10, large_bbox, max_epochs = 12, lr = 0.001, val_batch_size = 2, train_batch_size = 2, loaded from https://download.openmmlab.com/mmdetection/v3.0/dino/dino-5scale_swin-l_8xb2-12e_coco/dino-5scale_swin-l_8xb2-12e_coco_20230228_072924-a654145f.pth
+
+GPU : 75G on A100
+
+Command:
+
+```bash
+export CUDA_VISIBLE_DEVICES=1
+python tools/train.py configs/dino/dino-5scale_swin-l_8xb2-12e_mobile_large_bbox.py --train_batch_size 3 --val_batch_size 2 --lr 0.001 --epoch 12 # 12 out of memory during 16
+# distributed training
+./tools/dist_train_custom.sh configs/dino/dino-5scale_swin-l_8xb2-12e_mobile_large_bbox.py 4
+```
+
+Result:
+
+```bash
+2266  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.189
+2267  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=1000 ] = 0.266
+2268  Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=1000 ] = 0.171
+2269  Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.000
+2270  Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.003
+2271  Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.192
+2272  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.352
+2273  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=300 ] = 0.373
+2274  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=1000 ] = 0.373
+2275  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=1000 ] = 0.000
+2276  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=1000 ] = 0.048
+2277  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=1000 ] = 0.379
+2278 05/29 05:18:49 - mmengine - INFO - bbox_mAP_copypaste: 0.189 0.266 0.171 0.000 0.003 0.192
+2279 05/29 05:18:49 - mmengine - INFO - Epoch(val) [36][28/28]    coco/bbox_mAP: 0.1890  coco/bbox_mAP_50: 0.2660  coco/bbox_mAP_75: 0.1710  coco/bbox_mAP_s: 0.0000  coco/bbox_mAP_m: 0.0030  coco/bbox_mAP_l: 0.1920  data_time: 0.0052  time: 0.5684
+```
+
+11, multi_bbox, max_epochs = 12, lr = 0.001, val_batch_size = 10, train_batch_size = 2, loaded from https://download.openmmlab.com/mmdetection/v3.0/dino/dino-5scale_swin-l_8xb2-12e_coco/dino-5scale_swin-l_8xb2-12e_coco_20230228_072924-a654145f.pth
+
+GPU : 75G on A100
+
+Command:
+
+```bash
+export CUDA_VISIBLE_DEVICES=0,1,2,3
+python tools/train.py configs/dino/dino-5scale_swin-l_8xb2-36e_mobile_multi_bbox.py --train_batch_size 2 --val_batch_size 2 --lr 0.001 --epoch 12 # 12 out of memory during 16
+# distributed training
+CUDA_VISIBLE_DEVICES=0,1,2,3 ./tools/dist_train_custom_multi_bbox.sh configs/dino/dino-5scale_swin-l_8xb2-36e_mobile_multi_bbox.py 4
+```
+
+Result:
+
+```bash
+```
+
+### Inference on test data
+
+Test data folder: [test_screendata/data](test_screendata/data)
+
+Reference:
+
+* [Inferencer](https://github.com/open-mmlab/mmdetection/blob/main/demo/inference_demo.ipynb)
+
+```bash
+python inference_test_screendata.py
+```
+
+#### Inference for small_bbox and large_bbox
+
+1. small
+
+```bash
+export CUDA_VISIBLE_DEVICES=0
+python inference_test_screendata.py --input_folder ../../test_screendata/osworld --model_config configs/dino/dino-4scale_r50_8xb2-36e_mobile_small_bbox.py --checkpoint /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-36e_mobile_small_bbox/epoch_36.pth && python inference_test_screendata.py --input_folder ../../test_screendata/mobile_pc_web --model_config configs/dino/dino-4scale_r50_8xb2-36e_mobile_small_bbox.py --checkpoint /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-36e_mobile_small_bbox/epoch_36.pth
+```
+
+2. larger
+
+```bash
+export CUDA_VISIBLE_DEVICES=1
+python inference_test_screendata.py --input_folder ../../test_screendata/osworld --model_config configs/dino/dino-4scale_r50_8xb2-36e_mobile_large_bbox.py --checkpoint /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-36e_mobile_large_bbox/epoch_36.pth && python inference_test_screendata.py --input_folder ../../test_screendata/mobile_pc_web --model_config configs/dino/dino-4scale_r50_8xb2-36e_mobile_large_bbox.py --checkpoint /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-36e_mobile_large_bbox/epoch_36.pth
+```
+
+#### Inference for multi_bbox
+
+1. epoch 36
+
+```bash
+export CUDA_VISIBLE_DEVICES=0
+python inference_test_screendata.py --input_folder ../../test_screendata/mobile_pc_web_osworld --model_config configs/dino/dino-4scale_r50_8xb2-36e_mobile_multi_bbox.py --checkpoint /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-36e_mobile_multi_bbox/epoch_36.pth
+```
+
+2. epoch 50
+
+```bash
+export CUDA_VISIBLE_DEVICES=0
+python inference_test_screendata.py --input_folder ../../test_screendata/mobile_pc_web_osworld --model_config configs/dino/dino-4scale_r50_8xb2-50e_mobile_multi_bbox.py --checkpoint /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-50e_mobile_multi_bbox/epoch_50.pth
+```
+
+3. epoch 90
+
+```bash
+export CUDA_VISIBLE_DEVICES=0
+python inference_test_screendata.py --input_folder ../../test_screendata/mobile_pc_web_osworld --model_config configs/dino/dino-4scale_r50_8xb2-90e_mobile_multi_bbox.py --checkpoint /data/orlando/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-90e_mobile_multi_bbox/epoch_90.pth
+```
