@@ -1,17 +1,17 @@
 # ToL Hierarchical GUI region detection
 
-## Training for models on mobile
+This project is cloned from [mmdetection](https://github.com/open-mmlab/mmdetection). We have added a customized DINO configuration to train on mobile data and inference on [Screen Point-and-Read (ScreenPR) Benchmark](https://huggingface.co/datasets/yfan1997/ScreenPR). The following guide includes details of training and inferencing.
 
-Reference:
+## Training DINO models on mobile data
 
-* [Customize Datasets](https://github.com/llv22/mmdetection_forward/blob/develop/docs/en/advanced_guides/customize_dataset.md)
-* [data['category_id'] = self.cat_ids[label] IndexError: list index out of range #4243](https://github.com/open-mmlab/mmdetection/issues/4243)
-* [Dataset customization](https://github.com/open-mmlab/mmdetection/tree/master/docs/en)
-* [CONFIG](https://mmengine.readthedocs.io/en/latest/advanced_tutorials/config.html#import-the-custom-module)
-* [Prepare dataset](https://mmdetection.readthedocs.io/en/latest/user_guides/train.html#prepare-datasets)
-* [Finetune model](https://mmdetection.readthedocs.io/en/latest/user_guides/finetune.html)
+### Environment setup
 
-### Setup
+Extra components to support uploading statistics to [wandb.io](https://wandb.ai/):
+
+```bash
+pip install future tensorboard
+pip install wandb
+```
 
 1. [configs/dino/convert_mobile_segement_to_coco.py](configs/dino/convert_mobile_segement_to_coco.py) migrates mobile section to coco dataset
 generate configs/dino/convert_mobile_segement_to_coco.py and prepare data in configs/dino/data
@@ -19,18 +19,6 @@ generate configs/dino/convert_mobile_segement_to_coco.py and prepare data in con
 2. [configs/dino/dino-4scale_r50_8xb2-12e_mobile.py](configs/dino/dino-4scale_r50_8xb2-12e_mobile.py) build model
 
 ### Result on different settings
-
-Reference:
-
-* [Train Object Detector with MMDetection and W&B](https://colab.research.google.com/drive/1-qxf3uuXPJr0QUsIic_4cRLxQ1ZBK3yQ?usp=sharing)
-* [Logging analysis](https://mmdetection.readthedocs.io/en/latest/user_guides/useful_tools.html)
-
-extrat components:
-
-```bash
-pip install future tensorboard
-pip install wandb
-```
 
 1. max_epochs = 2, lr=0.0001, in /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/configs/_base_/datasets/mobile_detection.py::train_dataloader & val_dataloader batch_size = 6 
 
@@ -44,7 +32,7 @@ python tools/train.py configs/dino/dino-4scale_r50_8xb2-12e_mobile.py /home/xian
 /home/xiandao_airs/workspace/ScreenReaderData/models/mmdetection_forward/data/val2017
 ```
 
-Result: 
+Result:
 
 ```bash
 05/20 23:48:53 - mmengine - INFO - Epoch(val) [2][37/37]    coco/bbox_mAP: 0.1760  coco/bbox_mAP_50: 0.2950  coco/bbox_mAP_75: 0.1830  coco/bbox_mAP_s: 0.0000  coco/bbox_mAP_m: 0.1910  coco/bbox_mAP_l: 0.1910  data_time: 0.0209  time: 0.2734
@@ -685,3 +673,14 @@ python inference_test_screendata.py --input_folder ../../test_screendata/mobile_
 export CUDA_VISIBLE_DEVICES=0
 python inference_test_screendata.py --input_folder ../../test_screendata/mobile_pc_web_osworld --model_config configs/dino/dino-4scale_r50_8xb2-90e_mobile_multi_bbox.py --checkpoint /data/orlando/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-90e_mobile_multi_bbox/epoch_90.pth
 ```
+
+Reference:
+
+* [Customize Datasets](https://github.com/llv22/mmdetection_forward/blob/develop/docs/en/advanced_guides/customize_dataset.md)
+* [data['category_id'] = self.cat_ids[label] IndexError: list index out of range #4243](https://github.com/open-mmlab/mmdetection/issues/4243)
+* [Dataset customization](https://github.com/open-mmlab/mmdetection/tree/master/docs/en)
+* [CONFIG](https://mmengine.readthedocs.io/en/latest/advanced_tutorials/config.html#import-the-custom-module)
+* [Prepare dataset](https://mmdetection.readthedocs.io/en/latest/user_guides/train.html#prepare-datasets)
+* [Finetune model](https://mmdetection.readthedocs.io/en/latest/user_guides/finetune.html)
+* [Train Object Detector with MMDetection and W&B](https://colab.research.google.com/drive/1-qxf3uuXPJr0QUsIic_4cRLxQ1ZBK3yQ?usp=sharing)
+* [Logging analysis](https://mmdetection.readthedocs.io/en/latest/user_guides/useful_tools.html)
