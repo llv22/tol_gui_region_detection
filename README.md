@@ -625,7 +625,7 @@ Result:
 
 ### Inference on test data
 
-Test data folder: [test_screendata/data](test_screendata/data)
+Test data folder: [test_screendata/data](test_screendata/data) and the weight has been inshared in [DINO weights trained by 90 epoch](https://drive.google.com/file/d/1IN3EfDKyXwu5WegqyFOWfXH6ttJ3zNdx/view?usp=drive_link)
 
 Reference:
 
