@@ -85,7 +85,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 ./tools/dist_train_custom_multi_bbox.sh configs/din
 
 * Step 1: Data preparation
 
-Put ScreenPR dataset under [the src folder](https://github.com/UeFan/Screen-Point-and-Read/tree/main/src) of Screen-Point-and-Read github folder, which has the relative path of [../../mobile_pc_web_osworld](../../mobile_pc_web_osworld).
+Put ScreenPR dataset under [the src folder](https://github.com/UeFan/Screen-Point-and-Read/tree/main/src) of Screen-Point-and-Read github folder, having the relative path of [../../mobile_pc_web_osworld](../../mobile_pc_web_osworld) to the root of currernt github project.
 
 * Step 2: Using our trained ToL model
 
