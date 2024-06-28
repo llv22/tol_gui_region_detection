@@ -69,7 +69,7 @@ mmengine - INFO - Epoch(val) [90][11/11]    coco/bbox_mAP: 0.9410  coco/bbox_mAP
 You can use the following script to run test.py for test data and the visualization result will be saved in the folder [dino-4scale_r50_8xb2-90e_mobile_multi_bbox_imgs/](dino-4scale_r50_8xb2-90e_mobile_multi_bbox_imgs/).
 
 ```bash
-python tools/test.py configs/dino/dino-4scale_r50_8xb2-90e_mobile_multi_bbox.py /data/orlando/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-90e_mobile_multi_bbox/epoch_90.pth --show-dir dino-4scale_r50_8xb2-90e_mobile_multi_bbox_imgs/
+python tools/test.py configs/dino/dino-4scale_r50_8xb2-90e_mobile_multi_bbox.py ./work_dirs/dino-4scale_r50_8xb2-90e_mobile_multi_bbox/epoch_90.pth --show-dir dino-4scale_r50_8xb2-90e_mobile_multi_bbox_imgs/
 ```
 
 * Step 3 [Optional]: use Swin-l as backbone to train for 12 epoch with configuration file [configs/dino/dino-5scale_swin-l_8xb2-36e_mobile_multi_bbox.py](configs/dino/dino-5scale_swin-l_8xb2-36e_mobile_multi_bbox.py). In comparison, the loss curve is much worse than the one of Rest backbone. 
