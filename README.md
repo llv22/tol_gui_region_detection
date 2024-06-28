@@ -83,11 +83,11 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 ./tools/dist_train_custom_multi_bbox.sh configs/din
 
 ## 3. Inference on ScreenPR dataset
 
-### Data preparation
+* Step 1: Data preparation
 
 Put ScreenPR dataset under [the src folder](https://github.com/UeFan/Screen-Point-and-Read/tree/main/src) of Screen-Point-and-Read github folder, which has the relative path of [../../mobile_pc_web_osworld](../../mobile_pc_web_osworld).
 
-### Using our trained ToL model
+* Step 2: Using our trained ToL model
 
 The pretrained LoT weight has been shared in [DINO weights trained by 90 epoch](https://drive.google.com/file/d/1IN3EfDKyXwu5WegqyFOWfXH6ttJ3zNdx/view?usp=drive_link), save it to [./work_dirs/dino-4scale_r50_8xb2-90e_mobile_multi_bbox/epoch_90.pth](./work_dirs/dino-4scale_r50_8xb2-90e_mobile_multi_bbox/epoch_90.pth) and use the following script to trigger inference.
 
@@ -96,7 +96,7 @@ export CUDA_VISIBLE_DEVICES=0
 python inference_test_screendata.py --input_folder ../../mobile_pc_web_osworld --model_config configs/dino/dino-4scale_r50_8xb2-90e_mobile_multi_bbox.py --checkpoint ./work_dirs/dino-4scale_r50_8xb2-90e_mobile_multi_bbox/epoch_90.pth
 ```
 
-### Using original Dino model
+* Step 3: Using original Dino model
 
 Download [the original Dino weights](https://download.openmmlab.com/mmdetection/v3.0/dino/dino-4scale_r50_improved_8xb2-12e_coco/dino-4scale_r50_improved_8xb2-12e_coco_20230818_162607-6f47a913.pth) and  save it to [./work_dirs/dino-4scale_r50_improved_8xb2-12e_coco/dino-4scale_r50_improved_8xb2-12e_coco_20230818_162607-6f47a913.pth](./work_dirs/dino-4scale_r50_improved_8xb2-12e_coco/dino-4scale_r50_improved_8xb2-12e_coco_20230818_162607-6f47a913.pth) and use the following script to trigger inference.
 
