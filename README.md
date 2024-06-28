@@ -37,7 +37,7 @@ cd configs/dino/
 python convert_mobile_output_to_mixed_coco.py
 ```
 
-* Step 2, Using [./tools/dist_train_custom.sh](./tools/dist_train_custom.sh) to train model on multiple GPUs. For our cases, 4 * A6000 are used and you can change the dist_train_custom.sh based on your own machine settings. 
+* Step 2, Using [./tools/dist_train_custom.sh](./tools/dist_train_custom.sh) to train model on multiple GPUs using Rest backbone. The model configuration file is [configs/dino/dino-4scale_r50_8xb2-90e_mobile_multi_bbox.py](configs/dino/dino-4scale_r50_8xb2-90e_mobile_multi_bbox.py). For our cases, 4 * A6000 are used and you can change the dist_train_custom.sh based on your own machine settings. 
 
 Run the following script to train on  4 * A6000:
 
@@ -72,7 +72,7 @@ You can use the following script to run test.py for test data and the visualizat
 python tools/test.py configs/dino/dino-4scale_r50_8xb2-90e_mobile_multi_bbox.py /data/orlando/workspace/ScreenReaderData/models/mmdetection_forward/work_dirs/dino-4scale_r50_8xb2-90e_mobile_multi_bbox/epoch_90.pth --show-dir dino-4scale_r50_8xb2-90e_mobile_multi_bbox_imgs/
 ```
 
-* Step 3 [Optional]: use Swin-l as backbone to train for 12 epoch. In comparison, 
+* Step 3 [Optional]: use Swin-l as backbone to train for 12 epoch with configuration file [configs/dino/dino-5scale_swin-l_8xb2-36e_mobile_multi_bbox.py](configs/dino/dino-5scale_swin-l_8xb2-36e_mobile_multi_bbox.py). In comparison, the loss curve is much worse than our 
 
 ```bash
 export CUDA_VISIBLE_DEVICES=0,1,2,3
