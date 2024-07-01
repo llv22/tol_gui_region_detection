@@ -30,14 +30,14 @@ pip install wandb
 
 ## 2. Training ToL model on ASHL dataset
 
-* Step 1 [Optional]: prepare training data with coco style using the migration script [configs/dino/convert_mobile_segement_to_coco.py](configs/dino/convert_mobile_segement_to_coco.py). Supposed the training data has been put into [../screendata](../screendata) folder. As we also put the generated files [configs/dino/data/train/annotation_coco.json](configs/dino/data/train/annotation_coco.json) and [configs/dino/data/val/annotation_coco.json](configs/dino/data/val/annotation_coco.json) into our source code, this step can be optional if you don't need configuration different from us.
+* Step 1 [Optional]: prepare training data with coco style using the migration script [configs/dino/convert_mobile_segement_to_multilabel_coco.py](configs/dino/convert_mobile_segement_to_multilabel_coco.py). Supposed the training data has been put into [../data/screendata](../data/screendata) folder. As we also put the generated files [configs/dino/data/train/annotation_multilabel_coco.json](configs/dino/data/train/annotation_multilabel_coco.json) and [configs/dino/data/val/annotation_multilabel_coco.json](configs/dino/data/val/annotation_multilabel_coco.json) into our source code, this step can be optional if you don't need configuration different from us.
 
 ```bash
 cd configs/dino/
-python convert_mobile_output_to_mixed_coco.py
+python convert_mobile_segement_to_multilabel_coco.py
 ```
 
-* Step 2, Using [./tools/dist_train_custom.sh](./tools/dist_train_custom.sh) to train model on multiple GPUs using Rest backbone. The model configuration file is [configs/dino/dino-4scale_r50_8xb2-90e_mobile_multi_bbox.py](configs/dino/dino-4scale_r50_8xb2-90e_mobile_multi_bbox.py). For our cases, 4 * A6000 are used and you can change the dist_train_custom.sh based on your own machine settings. 
+* Step 2, Using [./tools/dist_train_custom_multi_bbox.sh](./tools/dist_train_custom_multi_bbox.sh) to train model on multiple GPUs using Rest backbone. The model configuration file is [configs/dino/dino-4scale_r50_8xb2-90e_mobile_multi_bbox.py](configs/dino/dino-4scale_r50_8xb2-90e_mobile_multi_bbox.py). For our cases, 4 * A6000 are used and you can change the dist_train_custom_multi_bbox.sh based on your own machine settings.
 
 Run the following script to train on  4 * A6000:
 

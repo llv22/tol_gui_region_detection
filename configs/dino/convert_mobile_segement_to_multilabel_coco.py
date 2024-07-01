@@ -52,11 +52,11 @@ def convert_mobile_segment_to_coco(ann_file, out_file, image_prefix):
 
 def conf():
     args = argparse.ArgumentParser()
-    args.add_argument("--train_ann_file", type=str, default="../../../../ScreenReaderData_train.json")
+    args.add_argument("--train_ann_file", type=str, default="../../../../../data/ScreenReaderData_train.json")
     args.add_argument("--train_out_file", type=str, default="data/train/annotation_multilabel_coco.json")
-    args.add_argument("--val_ann_file", type=str, default="../../../../ScreenReaderData_val.json")
+    args.add_argument("--val_ann_file", type=str, default="../../../../../data/ScreenReaderData_val.json")
     args.add_argument("--val_out_file", type=str, default="data/val/annotation_multilabel_coco.json")
-    args.add_argument("--image_prefix", type=str, default="../../../../")
+    args.add_argument("--image_prefix", type=str, default="../../../../../data/")
     return args.parse_args()
 
 def refine_file_name(filePath:Path, label:str):
