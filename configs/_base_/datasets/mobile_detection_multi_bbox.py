@@ -37,7 +37,7 @@ test_pipeline = [
 ]
 
 # from configs/dino back to root of image data
-image_prefix = '../../../../'
+image_prefix = '../../../../../data'
 train_dataloader = dict(
     batch_size=6,
     num_workers=2,

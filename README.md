@@ -93,7 +93,7 @@ The pretrained LoT weight has been shared in [DINO weights trained by 90 epoch](
 
 ```bash
 export CUDA_VISIBLE_DEVICES=0
-python inference_test_screendata.py --input_folder ../../mobile_pc_web_osworld --model_config configs/dino/dino-4scale_r50_8xb2-90e_mobile_multi_bbox.py --checkpoint ./work_dirs/dino-4scale_r50_8xb2-90e_mobile_multi_bbox/epoch_90.pth
+python inference_test_screendata.py --input_folder ../../../data/mobile_pc_web_osworld --model_config configs/dino/dino-4scale_r50_8xb2-90e_mobile_multi_bbox.py --checkpoint ./work_dirs/dino-4scale_r50_8xb2-90e_mobile_multi_bbox/epoch_90.pth
 ```
 
 * Step 3: Using original Dino model
