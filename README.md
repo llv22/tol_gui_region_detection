@@ -89,7 +89,7 @@ Put ScreenPR dataset under [the src folder](https://github.com/UeFan/Screen-Poin
 
 * Step 2: Using our trained ToL model
 
-The pretrained LoT weight has been shared in [DINO weights trained by 90 epoch](https://drive.google.com/file/d/1IN3EfDKyXwu5WegqyFOWfXH6ttJ3zNdx/view?usp=drive_link), save it to [./work_dirs/dino-4scale_r50_8xb2-90e_mobile_multi_bbox/epoch_90.pth](./work_dirs/dino-4scale_r50_8xb2-90e_mobile_multi_bbox/epoch_90.pth) and use the following script to trigger inference.
+The pretrained LoT weight has been shared in [DINO weights trained by 90 epoch](https://drive.google.com/file/d/1IN3EfDKyXwu5WegqyFOWfXH6ttJ3zNdx/view?usp=drive_link), save it to [./work_dirs/dino-4scale_r50_8xb2-90e_mobile_multi_bbox/epoch_90.pth](./work_dirs/dino-4scale_r50_8xb2-90e_mobile_multi_bbox/epoch_90.pth) and use the following script to trigger inference. A output folder will be generated with the name output_dino-4scale_r50_8xb2-90e_mobile_multi_bbox_mobile_pc_web_osworld under the same parent folder [../../../data/](https://github.com/eric-ai-lab/Screen-Point-and-Read/tree/main/data/mobile_pc_web_osworld).  
 
 ```bash
 export CUDA_VISIBLE_DEVICES=0
@@ -102,7 +102,7 @@ Download [the original Dino weights](https://download.openmmlab.com/mmdetection/
 
 ```bash
 export CUDA_VISIBLE_DEVICES=0
-python inference_test_screendata_by_dino_original.py --input_folder ../../mobile_pc_web_osworld
+python inference_test_screendata_by_dino_original.py --input_folder ../../../data/mobile_pc_web_osworld
 ```
 
 ### Using ToL model trained before
